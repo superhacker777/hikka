@@ -303,8 +303,6 @@ func start() {
   // Results are stored here
   var authorized    []DeviceInfo
   var unauthorized  []CameraAddress
-  defer dumpAuthCSV(csv, &authorized)
-  defer dumpGoodCSV(csv, &unauthorized)
 
 
   // no shadowing pls
@@ -320,6 +318,8 @@ func start() {
     }
     defer csv.Close()
   }
+  defer dumpAuthCSV(csv, &authorized)
+  defer dumpGoodCSV(csv, &unauthorized)
 
 
   // Catching results here.
