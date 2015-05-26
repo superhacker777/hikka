@@ -18,10 +18,7 @@ import (
   "encoding/csv"
   // "encoding/json"
   "github.com/fatih/color"
-  "net/http"
 )
-
-import _ "net/http/pprof"
 
 var threads         int
 var port            uint16
@@ -396,12 +393,7 @@ func main() {
   warn  = color.New(color.FgYellow, color.Bold)
   succ  = color.New(color.FgGreen, color.Bold)
 
-  // Enable profiling
-  go func() {
-    fmt.Println(http.ListenAndServe("localhost:6060", nil))
-  }()
-
-  
+ 
   initialize()
 
   start()
