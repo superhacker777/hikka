@@ -116,7 +116,7 @@ func grabShoots(ip string, uid int64, startChannel int, count int, login string,
     )
 
     if (result == 0) {
-      err.Println("Error while downloading a photo:", (int)(C.NET_DVR_GetLastError()))
+      err.Println("Error while downloading a snapshot from", ip, ":", (int)(C.NET_DVR_GetLastError()))
     } else {
       os.Chmod(filename, 0644)
       downloaded++
@@ -168,11 +168,15 @@ func bruteforce(ip string, results chan DeviceInfo) {
             (C.DWORD)(unsafe.Sizeof(ipcfg)),
             (*C.uint32_t)(unsafe.Pointer(&written)),
           ) == 1) {
+            var count C.BYTE = 0
             for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
-              device.byChanNum++
+              count++
             }
 
-            device.byStartChan += 32
+            if (count > 0) {
+              device.byChanNum    = count
+              device.byStartChan += 32
+            }
           }
 
           grabShoots(
