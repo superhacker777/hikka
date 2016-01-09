@@ -22,7 +22,7 @@ import (
 
 var threads int
 var bf_threads int
-var port uint16
+var port int
 var ping bool
 var logins_file string
 var passwords_file string
@@ -67,7 +67,7 @@ func HPRPing(ip string) bool {
 
 	var response [16]byte
 
-	conn, err := net.DialTimeout("tcp", ip+":"+strconv.Itoa(int(port)), 3*time.Second)
+	conn, err := net.DialTimeout("tcp", ip+":"+strconv.Itoa(port), 3*time.Second)
 	if err != nil {
 		return false
 	}
@@ -194,7 +194,7 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 			password,
 			(uint8)(device.byStartChan),
 			(uint8)(device.byChanNum),
-			CameraAddress{ip, port},
+			CameraAddress{ip, uint16(port)},
 		}
 
 		C.NET_DVR_Logout((C.LONG)(uid))
@@ -250,7 +250,7 @@ Feeding:
 	if !found {
 		warn.Println("Can't log into", ip)
 
-		results <- DeviceInfo{Address: CameraAddress{ip, port}}
+		results <- DeviceInfo{Address: CameraAddress{ip, uint16(port)}}
 	}
 }
 
@@ -310,7 +310,7 @@ func dumpGoodCSV(file *os.File, devices *[]CameraAddress) {
 func parseFlags() {
 	flag.IntVar(&threads, "threads", 1, "Threads count")
 	flag.IntVar(&bf_threads, "bf-threads", 1, "Bruteforcer threads count")
-	port = (uint16)(*flag.Int("port", 8000, "Camera service port"))
+	flag.IntVar(&port, "port", 8000, "Camera service port")
 	flag.BoolVar(&ping, "check", false, "Check cameras (experimental and not fully tested, but very useful)")
 	flag.StringVar(&logins_file, "logins", "logins", "A file with a list of logins to bruteforce")
 	flag.StringVar(&passwords_file, "passwords", "passwords", "A file with a list of passwords to bruteforce")
