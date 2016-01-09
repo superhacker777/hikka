@@ -437,18 +437,24 @@ func start() {
 }
 
 func main() {
-	C.NET_DVR_Init()
-	defer C.NET_DVR_Cleanup()
-
-	// No such function in windows lib
-	// C.NET_DVR_SetRecvTimeOut(3000);
-
 	parseFlags()
 
 	err = color.New(color.FgRed, color.Bold)
 	info = color.New(color.FgBlue, color.Bold)
 	warn = color.New(color.FgYellow, color.Bold)
 	succ = color.New(color.FgGreen, color.Bold)
+
+	if port < 0 || port > 0xFFFF {
+		err.Println("Wrong port value")
+
+		os.Exit(-1)
+	}
+
+	C.NET_DVR_Init()
+	defer C.NET_DVR_Cleanup()
+
+	// No such function in windows lib
+	// C.NET_DVR_SetRecvTimeOut(3000);
 
 	initialize()
 
