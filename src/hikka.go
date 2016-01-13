@@ -2,6 +2,7 @@ package main
 
 /*
 #include "HCNetSDK.h"
+#include <stdlib.h>
 */
 import "C"
 import (
@@ -93,6 +94,8 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 
 	for i := startChannel; i < startChannel+count; i++ {
 		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shoots_path, login, password, ip, i)
+		c_filename := C.CString(filename)
+		defer C.free(unsafe.Pointer(c_filename))
 
 		var imgParams C.NET_DVR_JPEGPARA
 		imgParams.wPicQuality = 0
@@ -102,7 +105,7 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 			(C.LONG)(uid),
 			(C.LONG)(i),
 			(*C.NET_DVR_JPEGPARA)(unsafe.Pointer(&imgParams)),
-			C.CString(filename),
+			c_filename,
 		)
 
 		if result == 0 {
@@ -174,11 +177,20 @@ type LoginData struct {
 func checkLogin(ip string, login string, password string, results chan DeviceInfo) bool {
 	var device C.NET_DVR_DEVICEINFO
 
+	c_ip := C.CString(ip)
+	defer C.free(unsafe.Pointer(c_ip))
+
+	c_login := C.CString(login)
+	defer C.free(unsafe.Pointer(c_login))
+
+	c_password := C.CString(password)
+	defer C.free(unsafe.Pointer(c_password))
+
 	uid := (int64)(C.NET_DVR_Login(
-		C.CString(ip),
+		c_ip,
 		C.WORD(port),
-		C.CString(login),
-		C.CString(password),
+		c_login,
+		c_password,
 		(*C.NET_DVR_DEVICEINFO)(unsafe.Pointer(&device)),
 	))
 
