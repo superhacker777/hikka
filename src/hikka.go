@@ -46,11 +46,12 @@ type CameraAddress struct {
 }
 
 type DeviceInfo struct {
-	Login         string        `json:"user"`
-	Password      string        `json:"password"`
-	StartChannel  uint8         `json:"start_channel"`
-	ChannelsCount uint8         `json:"channels"`
-	Address       CameraAddress `json:"address"`
+	Login               string        `json:"user"`
+	Password            string        `json:"password"`
+	StartChannel        uint8         `json:"start_channel"`
+	AnalogChannelsCount uint8         `json:"analog_channels"`
+	IPChannelsCount     uint8         `json:"ip_channels"`
+	Address             CameraAddress `json:"address"`
 }
 
 // type JsonResult struct {
@@ -123,8 +124,7 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 	}
 }
 
-func processSnapshots(ip string, uid int64, login string, password string, device C.NET_DVR_DEVICEINFO) {
-	var ip_count C.BYTE = 0
+func getIpChannelsCount(uid int64) (count int) {
 	var ipcfg C.NET_DVR_IPPARACFG
 	var written int32
 
@@ -138,9 +138,15 @@ func processSnapshots(ip string, uid int64, login string, password string, devic
 		(*C.uint32_t)(unsafe.Pointer(&written)),
 	) >= 0 {
 		for i := 0; i < C.MAX_IP_CHANNEL && ipcfg.struIPChanInfo[i].byEnable == 1; i++ {
-			ip_count++
+			count++
 		}
 	}
+
+	return
+}
+
+func processSnapshots(ip string, uid int64, login string, password string, device C.NET_DVR_DEVICEINFO) {
+	ip_count := getIpChannelsCount(uid)
 
 	// SHIT
 	if ip_count != 0 || device.byChanNum != 0 {
@@ -206,6 +212,7 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 			password,
 			(uint8)(device.byStartChan),
 			(uint8)(device.byChanNum),
+			(uint8)(getIpChannelsCount(uid)),
 			CameraAddress{ip, uint16(port)},
 		}
 
@@ -289,6 +296,8 @@ func dumpAuthCSV(file *os.File, devices *[]DeviceInfo) {
 			strconv.Itoa((int)(cam.Address.Port)),
 			cam.Login,
 			cam.Password,
+			strconv.Itoa((int)(cam.AnalogChannelsCount)),
+			strconv.Itoa((int)(cam.IPChannelsCount)),
 		})
 	}
 
