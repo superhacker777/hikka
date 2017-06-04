@@ -6,22 +6,30 @@
 
 I'm using a makefile, so you should be able to build it under Linux using this command:
 
-    # make linux
+    make linux
 
 
 You can also build it for Windows if you have a MinGW installed:
 
-    # make windows
+    make windows
 
     
 And you can make binaries for Linux and Windows by omiting a make target (it is useful for me as I distribute every build to people who don't know anything about compilers):
 
-    # make
+    make
 
 
 And now you have a `build` directory with compiled app.
 
 ---
+
+## How to compile:
+
+    apt install git golang-go mingw-w64
+    git clone https://github.com/superhacker777/hikka
+    export GOPATH=$HOME/go
+    go get https://github.com/fatih/color
+    cd hikka && make
 
 ## Usage
 
