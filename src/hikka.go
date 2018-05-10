@@ -20,26 +20,26 @@ import (
 	// "encoding/json"
 	"github.com/fatih/color"
 )
+var ping 			bool
+var bfThreads 		int
+var port 			int
+var threads 		int
+var csvFile 		string
+var jsonFile 		string
+var loginsFile 		string
+var m3uFile 		string
+var passwordsFile 	string
+var shootsPath 		string
 
-var threads int
-var bfThreads int
-var port int
-var ping bool
-var loginsFile string
-var passwordsFile string
-var shootsPath string
-var jsonFile string
-var csvFile string
-var m3uFile string
-
-var logins []string
-var passwords []string
+var logins []		string
+var passwords []	string
 
 var err *color.Color
 var info *color.Color
 var warn *color.Color
 var succ *color.Color
 
+//Structure of camera's adress
 type CameraAddress struct {
 	IP   string `json:"ip"`
 	Port uint16 `json:"port"`
