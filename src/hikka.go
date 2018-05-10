@@ -22,15 +22,15 @@ import (
 )
 
 var threads int
-var bf_threads int
+var bfThreads int
 var port int
 var ping bool
-var logins_file string
-var passwords_file string
-var shoots_path string
-var json_file string
-var csv_file string
-var m3u_file string
+var loginsFile string
+var passwordsFile string
+var shootsPath string
+var jsonFile string
+var csvFile string
+var m3uFile string
 
 var logins []string
 var passwords []string
@@ -94,7 +94,7 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 	downloaded := 0
 
 	for i := startChannel; i < startChannel+count; i++ {
-		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shoots_path, login, password, ip, i)
+		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shootsPath, login, password, ip, i)
 		c_filename := C.CString(filename)
 		defer C.free(unsafe.Pointer(c_filename))
 
@@ -203,7 +203,7 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 	if uid >= 0 {
 		succ.Printf("Logged in: %s:%s@%s\n", login, password, ip)
 
-		if shoots_path != "" {
+		if shootsPath != "" {
 			processSnapshots(ip, uid, login, password, device)
 		}
 
@@ -238,7 +238,7 @@ func bruteforce(ip string, results chan DeviceInfo) {
 	bfChan := make(chan LoginData)
 	bfg := new(sync.WaitGroup)
 
-	for i := 0; i < bf_threads; i++ {
+	for i := 0; i < bfThreads; i++ {
 		bfg.Add(1)
 
 		go func() {
@@ -330,15 +330,15 @@ func dumpGoodCSV(file *os.File, devices *[]CameraAddress) {
 
 func parseFlags() {
 	flag.IntVar(&threads, "threads", 1, "Threads count")
-	flag.IntVar(&bf_threads, "bf-threads", 1, "Bruteforcer threads count")
+	flag.IntVar(&bfThreads, "bf-threads", 1, "Bruteforcer threads count")
 	flag.IntVar(&port, "port", 8000, "Camera service port")
 	flag.BoolVar(&ping, "check", false, "Check cameras (experimental and not fully tested, but very useful)")
-	flag.StringVar(&logins_file, "logins", "logins", "A file with a list of logins to bruteforce")
-	flag.StringVar(&passwords_file, "passwords", "passwords", "A file with a list of passwords to bruteforce")
-	flag.StringVar(&shoots_path, "shoots", "", "Download pics from cameras into a folder")
-	flag.StringVar(&csv_file, "csv", "", "Write result to CSV")
-	flag.StringVar(&json_file, "json", "", "Write result to JSON")
-	flag.StringVar(&m3u_file, "m3u", "", "Write result to m3u playlist")
+	flag.StringVar(&loginsFile, "logins", "logins", "A file with a list of logins to bruteforce")
+	flag.StringVar(&passwordsFile, "passwords", "passwords", "A file with a list of passwords to bruteforce")
+	flag.StringVar(&shootsPath, "shoots", "", "Download pics from cameras into a folder")
+	flag.StringVar(&csvFile, "csv", "", "Write result to CSV")
+	flag.StringVar(&jsonFile, "json", "", "Write result to JSON")
+	flag.StringVar(&m3uFile, "m3u", "", "Write result to m3u playlist")
 	flag.Parse()
 }
 
@@ -346,7 +346,7 @@ func initialize() {
 	// No shadowing pls
 	var err error
 
-	logins, err = readLines(logins_file)
+	logins, err = readLines(loginsFile)
 	if err != nil {
 		fmt.Println(err)
 
@@ -354,7 +354,7 @@ func initialize() {
 	}
 	fmt.Println("Loaded", len(logins), "logins")
 
-	passwords, err = readLines(passwords_file)
+	passwords, err = readLines(passwordsFile)
 	if err != nil {
 		fmt.Println(err)
 
@@ -363,12 +363,12 @@ func initialize() {
 	fmt.Println("Loaded", len(passwords), "passwords")
 
 	// Creating a directory for pics
-	if shoots_path != "" {
-		if string(shoots_path[len(shoots_path)-1]) != string(os.PathSeparator) {
-			shoots_path += string(os.PathSeparator)
+	if shootsPath != "" {
+		if string(shootsPath[len(shootsPath)-1]) != string(os.PathSeparator) {
+			shootsPath += string(os.PathSeparator)
 		}
 
-		err = os.MkdirAll(shoots_path, 0777)
+		err = os.MkdirAll(shootsPath, 0777)
 		if err != nil {
 			fmt.Println(err)
 
@@ -390,8 +390,8 @@ func start() {
 
 	// Creating a CSV file for results
 	var csv *os.File
-	if csv_file != "" {
-		csv, err = os.Create(csv_file)
+	if csvFile != "" {
+		csv, err = os.Create(csvFile)
 		if err != nil {
 			panic(err)
 		}
@@ -408,7 +408,7 @@ func start() {
 
 	go func() {
 		for li := range results {
-			if csv_file != "" {
+			if csvFile != "" {
 				if li.Login != "" {
 					authorized = append(authorized, li)
 
@@ -481,8 +481,8 @@ func main() {
 
 	start()
 
-	// if (json_file != "") {
-	//	 color.New(color.FgBlue, color.Bold).Println("Writing JSON to", json_file)
+	// if (jsonFile != "") {
+	//	 color.New(color.FgBlue, color.Bold).Println("Writing JSON to", jsonFile)
 
 	//	 j, err := json.MarshalIndent(
 	//		 JsonResult{
@@ -496,7 +496,7 @@ func main() {
 	//		 panic(err)
 	//	 }
 
-	//	 f, err := os.Create(json_file)
+	//	 f, err := os.Create(jsonFile)
 	//	 if (err != nil) {
 	//		 panic(err)
 	//	 }
@@ -506,10 +506,10 @@ func main() {
 	//	 f.WriteString(string(j))
 	// }
 
-	// if (m3u_file != "") {
-	//	 color.New(color.FgBlue, color.Bold).Println("Writing m3u playlist to", m3u_file)
+	// if (m3uFile != "") {
+	//	 color.New(color.FgBlue, color.Bold).Println("Writing m3u playlist to", m3uFile)
 
-	//	 f, err := os.Create(m3u_file)
+	//	 f, err := os.Create(m3uFile)
 	//	 if (err != nil) {
 	//		 panic(err)
 	//	 }
