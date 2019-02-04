@@ -1,4 +1,4 @@
-#hikka — IP camera bruteforcer based on Hikvision SDK.
+# hikka — IP camera bruteforcer based on Hikvision SDK.
 
 ---
 
@@ -39,17 +39,6 @@ __Please note that it is hardcoded to read IPs from file called “hosts”!__
 A typical cammand is:
 
     hikka -threads 200 -check -shoots pics/
-
-
-Here you go, kid.
-
----
-
-## TODO
-
-1. Export result to JSON, iVMS-compatible CSV and m3u playlist.
-2. Some features like checking PTZ- and microphone-enabled cameras.
-3. Rewrite bruteforcing routine to make it possible to bruteforce a single camera in multiple threads (there's a one thread for every camera now).
 
 ---
 
