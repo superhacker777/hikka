@@ -446,7 +446,7 @@
 #define NET_DVR_RTSP_ERROR_NOENOUGHPRI              401  // no authoration: RTSP return error code 401.
 #define NET_DVR_RTSP_ERROR_ALLOC_RESOURCE           402  // fail to alloc resource
 #define NET_DVR_RTSP_ERROR_PARAMETER                403  // parameter error.
-#define NET_DVR_RTSP_ERROR_NO_URL                   404  // can't find the url. when server return 404£¨RTSP return it.
+#define NET_DVR_RTSP_ERROR_NO_URL                   404  // can't find the url. when server return 404ÔºåRTSP return it.
 #define NET_DVR_RTSP_ERROR_FORCE_STOP               406  // user force to stop.
 #define NET_DVR_RTSP_GETPORTFAILED                  407  // rtsp get port failed
 
@@ -1165,7 +1165,7 @@ NET_DVR_DecPlayBackCtrl
 #define	NET_DVR_GET_SCREEN_WINCFG			 1603		//Get single window parameter 
 #define	NET_DVR_LAYOUTLIST_GET 				 1605		//Get layout list
 #define	NET_DVR_SET_LAYOUTCFG				 1606		//Set layout
-#define	NET_DVR_LAYOUTCTRL					 1607		//Layout control£¨1-open£¨2-close
+#define	NET_DVR_LAYOUTCTRL					 1607		//Layout controlÔºå1-openÔºå2-close
 #define	NET_DVR_INPUTLIST_GET				 1608		//Get signal source list
 #define	NET_DVR_SET_INPUTSTREAMCFG			 1609		//Set signal source
 #define	NET_DVR_OUTPUT_SET					 1610		//Set output parameter
@@ -1218,10 +1218,10 @@ NET_DVR_DecPlayBackCtrl
 #define 	NET_DVR_LED_CHECKTIME			2020	// LED checktime
 #define		NET_DVR_GET_LED_STATUS			2023		//get LED status
 
-#define 	NET_DVR_GET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2021 //ªÒ»°“Ù∆µ∏˙ÀÊ±®æØ ¬º˛
-#define 	NET_DVR_SET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2022 //…Ë÷√“Ù∆µ∏˙ÀÊ±®æØ ¬º˛
+#define 	NET_DVR_GET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2021 //Ëé∑ÂèñÈü≥È¢ëË∑üÈöèÊä•Ë≠¶‰∫ã‰ª∂
+#define 	NET_DVR_SET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2022 //ËÆæÁΩÆÈü≥È¢ëË∑üÈöèÊä•Ë≠¶‰∫ã‰ª∂
 
-//2009-2020£¨2023 use for DS-19C08-JN V2.0
+//2009-2020Ôºå2023 use for DS-19C08-JN V2.0
 #define 	NET_DVR_GET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2021 //Get audio associate alarm
 #define 	NET_DVR_SET_ALARMHOST_AUDIO_ASSOCIATE_ALARM		2022 //set audio associate alarm
 
@@ -1315,7 +1315,7 @@ NET_DVR_DecPlayBackCtrl
 #define NET_DVR_GET_STREAM_RECORD_STATUS	 6021		//Get stream record status
 #define NET_DVR_SET_STREAM_RECORD_STATUS	 6022		//Set stream record status
 
-//NVR£∫96xx
+//NVRÔºö96xx
 #define NET_DVR_GET_IP_ALARM_GROUP_NUM		 6100  
 #define NET_DVR_GET_IP_ALARM_IN				 6101  
 #define NET_DVR_GET_IP_ALARM_OUT			 6102
@@ -1908,7 +1908,7 @@ NET_DVR_DecPlayBackCtrl
 #define MINOR_SET_MULTI_SLAVE           0x202    /*set multi slave*/
 #define MINOR_CANCEL_MULTI_MASTER       0x203    /*cancel multi master*/
 #define MINOR_CANCEL_MULTI_SLAVE        0x204    /*cancel multi slave*/
-//2011-11-11 ‘ˆº”¥Û∆¡øÿ÷∆∆˜≤Ÿ◊˜»’÷æ¥Œ¿‡–Õ
+//2011-11-11 Â¢ûÂä†Â§ßÂ±èÊéßÂà∂Âô®Êìç‰ΩúÊó•ÂøóÊ¨°Á±ªÂûã
 #define MINOR_SCREEN_SET_INPUT			0x251    /*set input signal*/
 #define MINOR_SCREEN_SET_OUTPUT			0x252    /*set output channel*/
 #define MINOR_SCREEN_SET_OSD			0x253    /*set OSD*/
@@ -1916,7 +1916,7 @@ NET_DVR_DecPlayBackCtrl
 #define MINOR_SCREEN_SET_LAYOUT			0x255    /*set layout*/
 #define	MINOR_SCREEN_PICTUREPREVIEW		0x256	 /*picture preview*/
 
-//2012-06-14 CVCS2.0, ¥∞ø⁄…Ë÷√µ»≤Ÿ◊˜‘⁄V1.0£¨ V1.1÷–“—æ≠”–¡À£¨µ± ±‘⁄…Ë±∏»’÷æ÷–√ª”–∂®“Â 
+//2012-06-14 CVCS2.0, Á™óÂè£ËÆæÁΩÆÁ≠âÊìç‰ΩúÂú®V1.0Ôºå V1.1‰∏≠Â∑≤ÁªèÊúâ‰∫ÜÔºåÂΩìÊó∂Âú®ËÆæÂ§áÊó•Âøó‰∏≠Ê≤°ÊúâÂÆö‰πâ 
 #define MINOR_SCREEN_GET_OSD			0x257   /*get OSD*/
 #define MINOR_SCREEN_GET_LAYOUT			0x258   /*get layout*/
 #define MINOR_SCREEN_LAYOUT_CTRL		0x259   /*layout control*/
@@ -2596,7 +2596,7 @@ typedef struct
 {
     BYTE byStreamType; 		//Stream type 0- video,  1- video&audio,  when it stands for compression parameters,  the highest bit stands for whether adopt encoding parameters
     /*Resolution 0-DCIF(P528*384), 1-CIF(P352*288), 2-QCIF(P176*144), 3-4CIF(P704*576),
-    4-2CIF(P704°¡288), 6-QVGA(320*240), 16-VGA(640*480), 17-UXGA(1600*1200), 
+    4-2CIF(P704√ó288), 6-QVGA(320*240), 16-VGA(640*480), 17-UXGA(1600*1200), 
     18-SVGA(800*600), 19-HD720p(1280*720), 20-XVGA(1280x960), 21-HD900p(1600x900), 22-SXGAp(1360*1024),
     27-1920*1080, 28-2560*1920, 29-1600*304, 30-2048*153, 31-2448*2048, 32-2448*1200,
     33-2448*800, 34-XGA(1024*768), 35-SXGA(1280*1024), 36-WD1(960*576/960*480),37-1080i,38-WXGA(1440*900),
@@ -3008,10 +3008,10 @@ typedef struct tagNET_DVR_DEV_CHAN_INFO
     NET_DVR_IPADDR 	struIP;		    //DVR IP address
     WORD 	wDVRPort;			 	//DVR PORT
     BYTE 	byChannel;				//Channel
-    BYTE	byTransProtocol;		//Transmit protocol:0-TCP£¨1-UDP
-    BYTE	byTransMode;			//Stream mode: 0£≠mian stream 1£≠sub stream
+    BYTE	byTransProtocol;		//Transmit protocol:0-TCPÔºå1-UDP
+    BYTE	byTransMode;			//Stream mode: 0Ôºçmian stream 1Ôºçsub stream
     BYTE	byFactoryType;			/*IPC factory type*/
-    BYTE	byDeviceType; //Device type(Used by videoplatfom VCA card)£¨1-decoder£®use decode channel No. or display channel depends on byVcaSupportChanMode in videoplatform ability struct£©£¨2-coder
+    BYTE	byDeviceType; //Device type(Used by videoplatfom VCA card)Ôºå1-decoderÔºàuse decode channel No. or display channel depends on byVcaSupportChanMode in videoplatform ability structÔºâÔºå2-coder
     BYTE    byDispChan;//Display channel No. used by VCA configuration
     BYTE	bySubDispChan;//Display sub channel No. used by VCA configuration
 	BYTE	byResolution;	//Resolution: 1-CIF 2-4CIF 3-720P 4-1080P 5-500w used by big screen controler
@@ -3217,7 +3217,7 @@ typedef struct
     BYTE  byDiskDriver;    //The value means its ANSC character, added for IVMS device
     BYTE  byRes1[1];
     DWORD dwHdGroup;       //Disk Group  (1- MAX_HD_GROUP) 
-	BYTE  byRecycling;	   //  0£∫no reuse£¨1£∫reuse
+	BYTE  byRecycling;	   //  0Ôºöno reuseÔºå1Ôºöreuse
     BYTE  byRes2[119]; 
 }NET_DVR_SINGLE_HD,  *LPNET_DVR_SINGLE_HD; 
 
@@ -3398,9 +3398,9 @@ typedef struct
     BYTE byMACAddr[MACADDR_LEN]; 	/* MAC */
     BYTE byPriority; 				/* Priority settings ,  0xff-  disable ,  0- low,  1- Mid,  2- High */
                                     /*
-                                    Low°≠°≠Default privileges including local/remote playback,  log & status query,  reboot/shut down.
-                                    Mid°≠°≠Include local/remote PTZ control,  manual record,  voice talk,  playback,  log & status query,  reboot/shut down,  log backup and remote preview. 
-                                    High°≠°≠Administrator
+                                    Low‚Ä¶‚Ä¶Default privileges including local/remote playback,  log & status query,  reboot/shut down.
+                                    Mid‚Ä¶‚Ä¶Include local/remote PTZ control,  manual record,  voice talk,  playback,  log & status query,  reboot/shut down,  log backup and remote preview. 
+                                    High‚Ä¶‚Ä¶Administrator
 									*/
     BYTE	byAlarmOnRight;         // Alarm In guard privileges
     BYTE	byAlarmOffRight;        // Alarm In unguard privileges
@@ -4109,7 +4109,7 @@ typedef struct
 
 
 //Image Quality
-typedef struct 
+typedef struct NET_DVR_JPEGPARA
 {
 /*Note:  If encoding resolution is VGA, it supports grabbing 0=CIF,  1=QCIF,  2=D1 image.
     But if encoding resolution is 3=UXGA (1600x1200) ,  4=SVGA (800x600) ,  5=HD720p (1280x720) ,  6=VGA,  7=XVGA,  and 8=HD900p it only support grabbing image with current resolution*/
@@ -4124,7 +4124,7 @@ typedef struct
 typedef struct 
 {
     DWORD dwSize; 
-    DWORD dwAlarmOutChan;                        /* 0®Cmain video output;  1®Caux1 video output;  2®Caux2 video output;  3®Caux3 video output;  4®Caux4 video output*/
+    DWORD dwAlarmOutChan;                        /* 0‚Äìmain video output;  1‚Äìaux1 video output;  2‚Äìaux2 video output;  3‚Äìaux3 video output;  4‚Äìaux4 video output*/
     DWORD dwAlarmChanSwitchTime;                 /* : 1Sec -  10: 10Sec */
     DWORD dwAuxSwitchTime[MAX_AUXOUT]; 			/* aux output switch time:  0-  no switch;  1- 5sec; 2- 10sec; 3- 20sec; 4- 30sec; 5- 60sec; 6- 120sec; 7- 300sec*/
     BYTE  byAuxOrder[MAX_AUXOUT][MAX_WINDOW]; 	/* aux output preview sequence,  0xff means not preview the camera */
@@ -4171,7 +4171,7 @@ typedef struct
 typedef struct
 {
     BYTE byEnableDDNS; 
-    BYTE byHostIndex; /*0-IPServer 1£≠Dyndns 2£≠PeanutHull£¨3- NO-IP, 4- HiDDNS*/
+    BYTE byHostIndex; /*0-IPServer 1ÔºçDyndns 2ÔºçPeanutHullÔºå3- NO-IP, 4- HiDDNS*/
     BYTE byRes1[2]; 
     struct
     {    
@@ -4744,7 +4744,7 @@ typedef struct
 /********************************Interface Parameters Structure (begin) *********************************/
 
 //NET_DVR_Login () 
-typedef struct
+typedef struct NET_DVR_DEVICEINFO
 {
     BYTE sSerialNumber[SERIALNO_LEN];   //SN
     BYTE byAlarmInPortNum; 		        //DVR Alarm input
@@ -4780,7 +4780,7 @@ typedef struct
     // bySupport & 0x40 support IPSAN directory search
 	BYTE bySupport1;        // Ability expand, the 'AND' result by bit: 0- not support;  1- support
 							// bySupport1 & 0x1, support snmp v30
-						    // bySupport1& 0x2£¨support distinguish download and playback
+						    // bySupport1& 0x2Ôºåsupport distinguish download and playback
 	                        //bySupport1 & 0x4, support deployment level
 	                        //bySupport1 & 0x8, support vca alarm time extension 
 							//bySupport1 & 0x10, support muti disks(more than 33)
@@ -5047,42 +5047,42 @@ typedef struct tagNET_DVR_WIFI_CFG_EX
         }wpa_psk; 
 		struct 
 		{
-            BYTE byEncryptType;  /*º”√‹¿‡–Õ,0-AES, 1-TKIP*/
-			BYTE byAuthType; //»œ÷§¿‡–Õ£¨0-EAP_TTLS,1-EAP_PEAP,2-EAP_TLS
+            BYTE byEncryptType;  /*Âä†ÂØÜÁ±ªÂûã,0-AES, 1-TKIP*/
+			BYTE byAuthType; //ËÆ§ËØÅÁ±ªÂûãÔºå0-EAP_TTLS,1-EAP_PEAP,2-EAP_TLS
             BYTE byRes[2];
 			union
             {
 				struct 
 				{
-                    BYTE byEapolVersion; //EAPOL∞Ê±æ£¨0-∞Ê±æ1£¨1-∞Ê±æ2
-                    BYTE byAuthType; //ƒ⁄≤ø»œ÷§∑Ω Ω£¨0-PAP£¨1-MSCHAPV2
+                    BYTE byEapolVersion; //EAPOLÁâàÊú¨Ôºå0-ÁâàÊú¨1Ôºå1-ÁâàÊú¨2
+                    BYTE byAuthType; //ÂÜÖÈÉ®ËÆ§ËØÅÊñπÂºèÔºå0-PAPÔºå1-MSCHAPV2
                     BYTE byRes1[2];
-                    BYTE byAnonyIdentity [NAME_LEN]; //ƒ‰√˚…Ì∑›
-					BYTE byUserName[NAME_LEN]; //”√ªß√˚
-                    BYTE byPassword[NAME_LEN]; //√‹¬Î
+                    BYTE byAnonyIdentity [NAME_LEN]; //ÂåøÂêçË∫´‰ªΩ
+					BYTE byUserName[NAME_LEN]; //Áî®Êà∑Âêç
+                    BYTE byPassword[NAME_LEN]; //ÂØÜÁ†Å
                     BYTE byRes[44];
-				}EAP_TTLS; //WPA-enterprise/WPA2-enterprisƒ£ Ω  ”√
+				}EAP_TTLS; //WPA-enterprise/WPA2-enterprisÊ®°ÂºèÈÄÇÁî®
 				struct 
 				{
-                    BYTE byEapolVersion; //EAPOL∞Ê±æ£¨0-∞Ê±æ1£¨1-∞Ê±æ2
-                    BYTE byAuthType; //ƒ⁄≤ø»œ÷§∑Ω Ω£¨0-GTC£¨1-MD5£¨2-MSCHAPV2
-                    BYTE byPeapVersion; //PEAP∞Ê±æ£¨0-∞Ê±æ0£¨1-∞Ê±æ1
-                    BYTE byPeapLabel; //PEAP±Í«©£¨0-¿œ±Í«©£¨1-–¬±Í«©
-                    BYTE byAnonyIdentity[NAME_LEN]; //ƒ‰√˚…Ì∑›
-					BYTE byUserName[NAME_LEN]; //”√ªß√˚
-					BYTE byPassword[NAME_LEN]; //√‹¬Î
+                    BYTE byEapolVersion; //EAPOLÁâàÊú¨Ôºå0-ÁâàÊú¨1Ôºå1-ÁâàÊú¨2
+                    BYTE byAuthType; //ÂÜÖÈÉ®ËÆ§ËØÅÊñπÂºèÔºå0-GTCÔºå1-MD5Ôºå2-MSCHAPV2
+                    BYTE byPeapVersion; //PEAPÁâàÊú¨Ôºå0-ÁâàÊú¨0Ôºå1-ÁâàÊú¨1
+                    BYTE byPeapLabel; //PEAPÊ†áÁ≠æÔºå0-ËÄÅÊ†áÁ≠æÔºå1-Êñ∞Ê†áÁ≠æ
+                    BYTE byAnonyIdentity[NAME_LEN]; //ÂåøÂêçË∫´‰ªΩ
+					BYTE byUserName[NAME_LEN]; //Áî®Êà∑Âêç
+					BYTE byPassword[NAME_LEN]; //ÂØÜÁ†Å
                     BYTE byRes[44]; 
-				}EAP_PEAP; //WPA-enterprise/WPA2-enterprisƒ£ Ω  ”√
+				}EAP_PEAP; //WPA-enterprise/WPA2-enterprisÊ®°ÂºèÈÄÇÁî®
 				struct 
 				{
-                    BYTE byEapolVersion; //EAPOL∞Ê±æ£¨0-∞Ê±æ1£¨1-∞Ê±æ2
+                    BYTE byEapolVersion; //EAPOLÁâàÊú¨Ôºå0-ÁâàÊú¨1Ôºå1-ÁâàÊú¨2
                     BYTE byRes1[3]; 
-                    BYTE byIdentity[NAME_LEN]; //…Ì∑›
-					BYTE byPrivateKeyPswd[NAME_LEN]; //ÀΩ‘ø√‹¬Î
+                    BYTE byIdentity[NAME_LEN]; //Ë∫´‰ªΩ
+					BYTE byPrivateKeyPswd[NAME_LEN]; //ÁßÅÈí•ÂØÜÁ†Å
                     BYTE byRes[76]; 
 				}EAP_TLS; 
             }auth_param;
-		}wpa_wpa2; //WPA-enterprise/WPA2-enterprisƒ£ Ω  ”√
+		}wpa_wpa2; //WPA-enterprise/WPA2-enterprisÊ®°ÂºèÈÄÇÁî®
     }key; 	
 }NET_DVR_WIFI_CFG_EX, *LPNET_DVR_WIFI_CFG_EX; 
 
@@ -5978,7 +5978,7 @@ typedef struct tagNET_DVR_SEARCH_EVENT_RET
 		{
 			DWORD dwRecordType;		//record type 
 			DWORD dwRecordLength;	//record length
-			BYTE  byLockFlag;    // lock flag 0£∫locked 1£∫not locked
+			BYTE  byLockFlag;    // lock flag 0Ôºölocked 1Ôºönot locked
 			BYTE  byRes[295];
 		}struStreamIDRet;
     }uSeniorRet; 
@@ -7158,7 +7158,7 @@ typedef struct tagNET_DVR_SNAPCFG
 
 typedef enum _ITC_MAINMODE_ABILITY_
 {
-    ITC_MODE_UNKNOW    = 0x0,   //Œﬁ
+    ITC_MODE_UNKNOW    = 0x0,   //Êó†
 	ITC_POST_MODE  = 0x1,  //post
 	ITC_EPOLICE_MODE      = 0x2,  //epolice
 	ITC_POSTEPOLICE_MODE  = 0x4  //post epolice
@@ -7436,7 +7436,7 @@ typedef struct tagNET_DVR_DEVICESTATECFG
 	DWORD dwSDFreeSpace; //Free space of SD card
 	BYTE byDetectorState[MAX_DRIVECHAN_NUM][MAX_COIL_NUM];  //State of magnetic vehicle detector: 0-unused;1-normal;2-exceptional 
 	BYTE byDetectorLinkState; //Connection state of magnetic vehicle detector: 0-disconnected;1-connected 
-	BYTE bySDStatus;    //SD state 0£≠activity,1£≠Dormancy,2£≠Abnormal, 3-no sd
+	BYTE bySDStatus;    //SD state 0Ôºçactivity,1ÔºçDormancy,2ÔºçAbnormal, 3-no sd
 	BYTE byFortifyLevel[MAX_FORTIFY_NUM]; //Fortify level,0-no,1-level 1(high),2-level 2(middle),3-level 3(low)
 	BYTE byRes2[116]; //Reserved
 }NET_DVR_DEVICESTATECFG, *LPNET_DVR_DEVICESTATECFG;
@@ -7538,7 +7538,7 @@ typedef struct
 	BYTE byStorageMode;		  //Hard Disk Mode:0-group,1-quota,2-drawframe
 	BYTE bySupport1;		  //Ability set
 	// bySupport1 & 0x1, support snmp v30
-	// bySupport1& 0x2£¨support distinguish download and playback
+	// bySupport1& 0x2Ôºåsupport distinguish download and playback
 	//bySupport1 & 0x4, support deployment level
 	//bySupport1 & 0x8, support vca alarm time extension 
 	//bySupport1 & 0x10, support muti disks(more than 33)
@@ -7603,9 +7603,9 @@ typedef struct tagNET_DVR_SNMPv3_USER
 typedef struct tagNET_DVR_SNMPCFG_V30
 {
     DWORD			dwSize;						// Structure length
-    BYTE			byEnableV1;					//0-disable SNMP V1£¨1-enable SNMP V1
-	BYTE			byEnableV2;					//0-disable SNMP V2£¨1-enable SNMP V2
-	BYTE			byEnableV3;					//0-disable SNMP V3£¨1-enable SNMP V3
+    BYTE			byEnableV1;					//0-disable SNMP V1Ôºå1-enable SNMP V1
+	BYTE			byEnableV2;					//0-disable SNMP V2Ôºå1-enable SNMP V2
+	BYTE			byEnableV3;					//0-disable SNMP V3Ôºå1-enable SNMP V3
     BYTE			byRes1[3];
     WORD			wServerPort;				// snmp port, default: 161
     BYTE			byReadCommunity[NAME_LEN];	// Read community, max: 31bytes, default: "public"
@@ -8224,7 +8224,7 @@ typedef struct tagNET_DVR_AIR_CONDITION_PARAM
 	DWORD	dwSize;		    //Structure size
 	BYTE	byEnable;	    //0- open, 1- shutdown
 	BYTE	byMode;		    //Air conditioning mode
-	BYTE	byTemperature;	//Temperature, general value is 16-30°„
+	BYTE	byTemperature;	//Temperature, general value is 16-30¬∞
 	BYTE	byRes[9];		//Reserved
 }NET_DVR_AIR_CONDITION_PARAM, *LPNET_DVR_AIR_CONDITION_PARAM;
 
@@ -8250,13 +8250,13 @@ typedef struct tagNET_DVR_ALARMIN_PARAM
 	DWORD   dwSize;
 	BYTE    byName[NAME_LEN];
 	WORD    wDetectorType; //see to DETECTOR_TYPE
-	BYTE    byType;        //Alarm in type,0: immediately alarm in,1-24hour audible alarm in,2-delay alarm in ,3-inside alarm in£¨4-key alarm in 5-Fire alarm in 6-perimeter Alarm in 7. 24-hour silent alarm in 0xff-no Alarm in
+	BYTE    byType;        //Alarm in type,0: immediately alarm in,1-24hour audible alarm in,2-delay alarm in ,3-inside alarm inÔºå4-key alarm in 5-Fire alarm in 6-perimeter Alarm in 7. 24-hour silent alarm in 0xff-no Alarm in
 	BYTE    byRes1;    
 	DWORD	dwParam;       //Area parameter, the delay time of delay area 
     NET_DVR_SCHEDTIME struAlarmTime[MAX_DAYS][MAX_TIMESEGMENT];/*Time period of fortification*/
 	BYTE    byAssociateAlarmOut[MAX_ALARMHOST_ALARMOUT_NUM];  //Alarm output channel associated with the alarm input
     BYTE	byAssociateSirenOut[8];		//Siren output, subscript 0 means siren NO.1, the value equals to 1 means output, 0 means not output
-	BYTE	bySensitivityParam;//Sensitivity parameter, 0-10ms°¢1-250ms°¢2-500ms°¢3-750ms
+	BYTE	bySensitivityParam;//Sensitivity parameter, 0-10ms„ÄÅ1-250ms„ÄÅ2-500ms„ÄÅ3-750ms
     BYTE	byArrayBypass; //0-not support bypass,1-support bypass
     BYTE    byRes[50];      // res
 }NET_DVR_ALARMIN_PARAM, *LPNET_DVR_ALARMIN_PARAM;
@@ -8285,7 +8285,7 @@ typedef struct tagNET_DVR_ALARMHOST_MAIN_STATUS
 	BYTE   byAlarmInStatus[MAX_ALARMHOST_ALARMIN_NUM];      //Alarm status of alarm input port(support to query max 512 alarm input ports), 0- without alarm, 1- with alarm
 	BYTE   byAlarmOutStatus[MAX_ALARMHOST_ALARMOUT_NUM];    //Status of alarm output port(support to query max 512 alarm output ports), 0- without alarm, 1- with alarm
 	BYTE   byBypassStatus[MAX_ALARMHOST_ALARMIN_NUM];       //Bypass status
-	BYTE   bySubSystemGuardStatus[MAX_ALARMHOST_SUBSYSTEM]; //subsystem status, 0-close state£¨1-setup state
+	BYTE   bySubSystemGuardStatus[MAX_ALARMHOST_SUBSYSTEM]; //subsystem status, 0-close stateÔºå1-setup state
     BYTE   byRes[568]; 
 }NET_DVR_ALARMHOST_MAIN_STATUS, *LPNET_DVR_ALARMHOST_MAIN_STATUS;
 
@@ -8333,11 +8333,11 @@ typedef struct tagNET_DVR_ALARMHOST_ABILITY
     WORD    wKeyboardUserNum;       //Total number of keyboard users
     WORD    wOperatorUserNum;       //Total number of operator users
 
-	BYTE    bySupportDetector;		//Is support detector£¨1-support£¨0-not support
-    BYTE    bySupportSensitivity;   //Is support sensitivity£¨1-support£¨0-not support
-    BYTE    bySupportArrayBypass;   //Is support array Bypass£¨1-support£¨0-not support
-    BYTE    bySupportAlarmInDelay;  //Is support alarm in delay,1-support£¨0-not support
-    BYTE    bySupportAlarmInType[16];//Alarm in type,0: immediately alarm in,1-24hour audible alarm in,2-delay alarm in ,3-inside alarm in£¨4-key alarm in 5-Fire alarm in 6-perimeter Alarm in 7. 24-hour silent alarm in 15-no
+	BYTE    bySupportDetector;		//Is support detectorÔºå1-supportÔºå0-not support
+    BYTE    bySupportSensitivity;   //Is support sensitivityÔºå1-supportÔºå0-not support
+    BYTE    bySupportArrayBypass;   //Is support array BypassÔºå1-supportÔºå0-not support
+    BYTE    bySupportAlarmInDelay;  //Is support alarm in delay,1-supportÔºå0-not support
+    BYTE    bySupportAlarmInType[16];//Alarm in type,0: immediately alarm in,1-24hour audible alarm in,2-delay alarm in ,3-inside alarm inÔºå4-key alarm in 5-Fire alarm in 6-perimeter Alarm in 7. 24-hour silent alarm in 15-no
 	BYTE	byTelNum;		        //Total number of telephone
 	BYTE	byCenterGroupNum;	    //Total number of center group number
 	BYTE	byGPRSNum;		        //Total number of GPRS number ,the max number is 4
@@ -8443,7 +8443,7 @@ typedef struct tagNET_DVR_GATEWAY_CFG
     BYTE	byEnable;	        //Enable or not
     BYTE    byLocalEnable;      //Disabled or enabled in local
     WORD    wDelayTime;	        //Delay time of opening, unit:s, value range: 0-65535, 0 means open all the time
-	BYTE	byLockWorkMode;		//lock work mode£¨0- start when power on£¨1- start when power off
+	BYTE	byLockWorkMode;		//lock work modeÔºå0- start when power onÔºå1- start when power off
     BYTE	byRes2[31];	        // Reserved
 }NET_DVR_GATEWAY_CFG, *LPNET_DVR_GATEWAY_CFG;
 
@@ -8489,7 +8489,7 @@ typedef struct tagNET_DVR_SWITCH_ALARM
     BYTE   byName[NAME_LEN]; 	//Switch name
     WORD  wSwitchChannel;       //Switch channel
     BYTE	byAlarmType;		//Alarm type
-	BYTE	byEventType;		//Event type 0-alarm£¨1-defense area fault
+	BYTE	byEventType;		//Event type 0-alarmÔºå1-defense area fault
     DWORD  dwRelativeTime;		//relative time
     NET_DVR_TIME_EX struOperateTime; 
     BYTE 	byRes[28];			//Reserved
@@ -8517,18 +8517,18 @@ typedef struct tagNET_DVR_ALARMHOST_EXCEPTION_ALARM
 }NET_DVR_ALARMHOST_EXCEPTION_ALARM, *LPNET_DVR_ALARMHOST_EXCEPTION_ALARM;
 
 //
-#define MAX_CENTERNUM			    4		//G1,G2 G3 G4 or N1£¨N2£¨N3£¨N4 or T1£¨T2£¨T3£¨T4
+#define MAX_CENTERNUM			    4		//G1,G2 G3 G4 or N1ÔºåN2ÔºåN3ÔºåN4 or T1ÔºåT2ÔºåT3ÔºåT4
 #define MAX_PHONE_NUM		        32
 typedef struct tagNET_DVR_PHONECENTERDIALCFG
 {
     BYTE sCenterName[NAME_LEN];
     BYTE byPhoneNum[MAX_PHONE_NUM/*32*/];  //center number  
-    BYTE byRepeatCall;          //time of repeat call £¨1~15times
-    BYTE byPstnProtocol;        //protocol£¨0-CID£ª
+    BYTE byRepeatCall;          //time of repeat call Ôºå1~15times
+    BYTE byPstnProtocol;        //protocolÔºå0-CIDÔºõ
     BYTE byDialDelay;           //time of dial delay, max time is 150s
-    BYTE byPstnTransMode;       //trans mode£¨0-DTMF 5/S£¨1-DTMF 10/S£ª
+    BYTE byPstnTransMode;       //trans modeÔºå0-DTMF 5/SÔºå1-DTMF 10/SÔºõ
     BYTE byRes1[6];
-    BYTE byReceiverId[6];     	//receive account ID£ª
+    BYTE byReceiverId[6];     	//receive account IDÔºõ
     BYTE byRes2[32];
 }NET_DVR_PHONECENTERDIALCFG, *LPNET_DVR_PHONECENTERDIALCFG;
 
@@ -8537,7 +8537,7 @@ typedef struct tagNET_DVR_ALARMHOSTDIALCFG
     DWORD dwSize;
     NET_DVR_PHONECENTERDIALCFG struPhoneCenterParam[MAX_CENTERNUM];//parameter of center 
 	WORD wReportPeriod;      //period of report:hour (max period is 168 hour)
-	WORD wFirstReportTime;	 //the time of sending first report£¨1~3600min
+	WORD wFirstReportTime;	 //the time of sending first reportÔºå1~3600min
 	BYTE  byReportValid;	//turn on the report mode 0-valid 1-invalidation
     BYTE  byRes[19];
 }NET_DVR_ALARMHOSTDIALCFG, *LPNET_DVR_ALARMHOSTDIALCFG;
@@ -8545,8 +8545,8 @@ typedef struct tagNET_DVR_ALARMHOSTDIALCFG
 typedef struct _tagNET_DVR_ALARMHOSTDIALSETUPMODE
 {
 	DWORD dwSize;
-	BYTE byEnableMode;//enable mode 0£∫close£¨1£∫open £¨2:open while the net is cutted down£¨close while natural£ª
-    BYTE byCallType; //report mode£¨1-one center£¨2-two centers£¨3£¨one is main center and the other is standby
+	BYTE byEnableMode;//enable mode 0ÔºöcloseÔºå1Ôºöopen Ôºå2:open while the net is cutted downÔºåclose while naturalÔºõ
+    BYTE byCallType; //report modeÔºå1-one centerÔºå2-two centersÔºå3Ôºåone is main center and the other is standby
     BYTE byRes1[14];
 }NET_DVR_ALARMHOSTDIALSETUPMODE, *LPNET_DVR_ALARMHOSTDIALSETUPMODE;
 
@@ -8586,19 +8586,19 @@ typedef struct tagNET_DVR_ALARM_CAM_CFG
 typedef struct _tagNET_DVR_ALARMHOST_AUDIO_ASSOCIATE_ALARM
 {
 	DWORD 		dwSize;
-	BYTE		byEnterDoor[8];	// Subscript is number of enter door, the value is assiociate information£¨0-not associated£¨ 1-8 is the audio index of associated
-	BYTE		byExitDoor[8]; 	//  Subscript is number of exit door, the value is assiociate information£¨0-not associated£¨ 1-8 is the audio index of associated
-	BYTE 		byAlarmIn[MAX_ALARMHOST_ALARMIN_NUM/*512*/];  // Subscript is number of alarm in, the value is assiociate information£¨0-not associated£¨ 1-8 is the audio index of associated
+	BYTE		byEnterDoor[8];	// Subscript is number of enter door, the value is assiociate informationÔºå0-not associatedÔºå 1-8 is the audio index of associated
+	BYTE		byExitDoor[8]; 	//  Subscript is number of exit door, the value is assiociate informationÔºå0-not associatedÔºå 1-8 is the audio index of associated
+	BYTE 		byAlarmIn[MAX_ALARMHOST_ALARMIN_NUM/*512*/];  // Subscript is number of alarm in, the value is assiociate informationÔºå0-not associatedÔºå 1-8 is the audio index of associated
 	BYTE 		byRes[128];
 }NET_DVR_ALARMHOST_AUDIO_ASSOCIATE_ALARM, *LPNET_DVR_ALARMHOST_AUDIO_ASSOCIATE_ALARM;
 
 typedef struct tagNET_DVR_UPLOAD_PARAM
 {
 	DWORD 		dwSize;
-	BYTE		byUploadType;	/*Upload type£¨1-get data by reading file£¨ 2-get data from buffer*/
-	BYTE		byDataType;		//data type£∫1-audio type
+	BYTE		byUploadType;	/*Upload typeÔºå1-get data by reading fileÔºå 2-get data from buffer*/
+	BYTE		byDataType;		//data typeÔºö1-audio type
 	BYTE		byDataNum;		//data index
-	BYTE		byAudioType;		//audio type£¨0-wave
+	BYTE		byAudioType;		//audio typeÔºå0-wave
 	char		sFileName[260];		//path of data file
 	char		*lpBuffer;			//data buffer
 	DWORD		dwBufferSize;		//length of the buffer
@@ -8609,8 +8609,8 @@ typedef void (CALLBACK *DATADOWNLOAD)(LONG nDownloadHandle, DWORD dwDataType, vo
 typedef struct tagNET_DVR_DOWNLOAD_PARAM
 {
 	DWORD 		dwSize;
-	BYTE		byDownType;		/*type of saving data£¨1-save data to the file by path£¨ 2-get data by callaback function*/
-	BYTE		byDataType;		//data type£∫1-audio type
+	BYTE		byDownType;		/*type of saving dataÔºå1-save data to the file by pathÔºå 2-get data by callaback function*/
+	BYTE		byDataType;		//data typeÔºö1-audio type
 	BYTE		byDataNum;		//data index
 	BYTE		byRes1;
 	char		sFileName[260];		//path of file
@@ -8626,13 +8626,13 @@ typedef  struct tagNET_DVR_LED_SCREEN_CFG
 	DWORD 		dwSize;
 	BYTE		sLEDName[NAME_LEN/*32*/];	// LED Screen name
 	BYTE		byTransMode; 				//  1-seiral port communication
-	BYTE		byProtocolType;				// protocol type£¨LED factories
-	BYTE		byLEDColor; 				// 1-one color£¨ 2-two-color£¨ 3-256 grayscale dual color£¨ 4- Full-color
-	BYTE		byDataPolarity;				// Data polarity .0-Negative electrode£¨1-positive electrode
+	BYTE		byProtocolType;				// protocol typeÔºåLED factories
+	BYTE		byLEDColor; 				// 1-one colorÔºå 2-two-colorÔºå 3-256 grayscale dual colorÔºå 4- Full-color
+	BYTE		byDataPolarity;				// Data polarity .0-Negative electrodeÔºå1-positive electrode
 	BYTE		byOEPolarity;				// 0-Active-low 1-Active-high
 	BYTE		byScanMode; 				// 1-1/16,  2-1/8,  3-1/4,  4-1/2,  5-static
 	BYTE		byRes1[2];
-	//Minimum width and height is 16*16£¨interval is 8 points	
+	//Minimum width and height is 16*16Ôºåinterval is 8 points	
 	WORD		wLEDWidth;	 				// 16~2048
 	WORD 		wLEDHeight;					// 16~2048
 	BYTE		byRes2[64];
@@ -8644,9 +8644,9 @@ typedef  struct tagNET_DVR_LED_CONTENT_CFG
 {
 	DWORD 		dwSize;
 	BYTE		sLEDContent[MAX_CONTENT_LEN];	// LED content
-	BYTE		byContentAct;					// 1-static£¨2-Quick play£¨3-Move to the left£¨4-Move to the right£¨ 5-Move up£¨ 6-Move down
-	BYTE		byContentSpeed;					// 1-24£®1-The fastest£¨24-The slowest£©	
-	BYTE		byContentStayTime; 				// 0-127.5s(Accuracy 0.5s£¨ SDK will Multiply 2 when transmission
+	BYTE		byContentAct;					// 1-staticÔºå2-Quick playÔºå3-Move to the leftÔºå4-Move to the rightÔºå 5-Move upÔºå 6-Move down
+	BYTE		byContentSpeed;					// 1-24Ôºà1-The fastestÔºå24-The slowestÔºâ	
+	BYTE		byContentStayTime; 				// 0-127.5s(Accuracy 0.5sÔºå SDK will Multiply 2 when transmission
 	BYTE		byRes[33];
 }NET_DVR_LED_CONTENT_CFG, *LPNET_DVR_LED_CONTENT_CFG;
 
@@ -8674,7 +8674,7 @@ typedef struct tagNET_DVR_LED_BRIGHTNESS_STEP
 	DWORD 		dwSize;
 	BYTE		byValid;		//use for Time-sharing brightness adjustment
 	BYTE		byRes1[3];
-	BYTE 		byBrightnessStep[TIME_SEGMENT_A_DAY /*48*/]; 	//total levels is 16£¨0~15
+	BYTE 		byBrightnessStep[TIME_SEGMENT_A_DAY /*48*/]; 	//total levels is 16Ôºå0~15
 	BYTE		byRes2[48];
 }NET_DVR_LED_BRIGHTNESS_STEP, *LPNET_DVR_LED_BRIGHTNESS_STEP;
 
@@ -8682,7 +8682,7 @@ typedef struct tagNET_DVR_LED_STATUS
 {
 	DWORD	dwSize;
 	BYTE	bySwitchState;		//1-status of turn on 2-status of turn off
-	BYTE	byBrightness;		//brightness£¨0-15
+	BYTE	byBrightness;		//brightnessÔºå0-15
 	BYTE	byRes[62];
 }NET_DVR_LED_STATUS, *LPNET_DVR_LED_STATUS;
 
@@ -8960,7 +8960,7 @@ typedef struct tagNET_DVR_FIND_LABEL
     NET_DVR_TIME	struStartTime;       	//Start time
     NET_DVR_TIME	struStopTime;	        //End time
     BYTE	    sLabelName[LABEL_NAME_LEN];	//Record label name. If the name is NULL, it will search all labels in the set period
-	BYTE		byDrawFrame;		//0:not draw frame£¨1£∫draw frame
+	BYTE		byDrawFrame;		//0:not draw frameÔºå1Ôºödraw frame
     BYTE	    byRes[39];		            //Reserved
 }NET_DVR_FIND_LABEL, *LPNET_DVR_FIND_LABEL;
 
@@ -9673,7 +9673,7 @@ typedef struct tagNET_DVR_VGA_DISP_CHAN_CFG_V40
     BYTE  	byJoinDecChan[MAX_WINDOWS];/*The decode channel joined with each sub-window*/
     BYTE	byEnlargeStatus;          /*Whether enlarge the window: 0- no, 1- yes*/
     BYTE    byEnlargeSubWindowIndex;//Enlarged sub window index
-    BYTE	byScale; /*Display mode: 0--real display£¨1--scaling display (for BNC)*/
+    BYTE	byScale; /*Display mode: 0--real displayÔºå1--scaling display (for BNC)*/
     /*Distinguish between the union: 0- display channel configuration of the decoder inner video integrated platform,
 	1- display channel configuration of other decoder*/
     BYTE	byUnionType;
@@ -9701,7 +9701,7 @@ typedef struct tagNET_DVR_VGA_DISP_CHAN_CFG_V40
 
 typedef struct tagNET_DVR_V6SUBSYSTEMPARAM
 {
-    BYTE		bySerialTrans;//Serial Transport£¨0-no£¨1-yes
+    BYTE		bySerialTrans;//Serial TransportÔºå0-noÔºå1-yes
     BYTE		byRes[35];
 }NET_DVR_V6SUBSYSTEMPARAM, *LPNET_DVR_V6SUBSYSTEMPARAM;
 
@@ -9842,12 +9842,12 @@ typedef struct
 	DWORD dwEnableSubStream;   //Whether enable the sub stream: 0- no, 1- yes
 	
 	BYTE  byMainProType;        //Main stream protocol type: 1- RTSP
-	BYTE  byMainTransType;	   //Main stream transport type 0£∫Auto 1£∫udp 2£∫rtp over rtsp
+	BYTE  byMainTransType;	   //Main stream transport type 0ÔºöAuto 1Ôºöudp 2Ôºörtp over rtsp
 	WORD  wMainPort;           //Main stream port
 	char  sMainPath[MAX_PRO_PATH];  //Main stream path 
 	
 	BYTE  bySubProType;         //Sub stream protocol type: 1- RTSP
-	BYTE  bySubTransType;	    //Main stream transport type 0£∫Auto 1£∫udp 2£∫rtp over rtsp
+	BYTE  bySubTransType;	    //Main stream transport type 0ÔºöAuto 1Ôºöudp 2Ôºörtp over rtsp
 	WORD  wSubPort;             //Sub stream port
 	char  sSubPath[MAX_PRO_PATH];   //Sub stream path 
 	
@@ -9872,7 +9872,7 @@ typedef struct tagNET_DVR_VOD_PARA
 //cycle to wall
 typedef struct  
 {
-    DWORD dwEnable; //0-disable 1£≠enable
+    DWORD dwEnable; //0-disable 1Ôºçenable
     BYTE  byType;   //device type 0: DEV_SDK  1:DEV_DAHUA  2:DEV_EHOME	3:DEV_OTHERES
     BYTE byRes[3];  //reserved
     NET_DVR_STREAM_MEDIA_SERVER_CFG streamMediaServerCfg; 
@@ -9944,7 +9944,7 @@ typedef struct
 
 typedef struct tagNET_DVR_DISPWINDOWMODE
 {
-    BYTE byDispChanType;//Display channel type£∫0-BNC, 1-VGA, 2-HDMI, 3-DVI
+    BYTE byDispChanType;//Display channel typeÔºö0-BNC, 1-VGA, 2-HDMI, 3-DVI
     BYTE byDispChanSeq;//sequence of display channel, if the byDispChanType is VGA, byDispChanSeq mean the sequence of VGA
     BYTE byRes[2];
     BYTE byDispMode[MAX_WINDOWS_NUM/*12*/];
@@ -9982,7 +9982,7 @@ typedef struct tagNET_DVR_MATRIX_ABILITY_V41
 	NET_DVR_DISPINFO struDviInfo;//information of DVI channels
 	NET_DVR_DISPWINDOWMODE struDispMode[MAX_DISPNUM_V41/*32*/];
 	NET_DVR_SCREENINFO struBigScreenInfo;
-	BYTE  bySupportAutoReboot; //auto reboot:0-not support£¨1-support
+	BYTE  bySupportAutoReboot; //auto reboot:0-not supportÔºå1-support
 	BYTE  byRes2[119];
 } NET_DVR_MATRIX_ABILITY_V41, *LPNET_DVR_MATRIX_ABILITY_V41;
 
@@ -10015,23 +10015,23 @@ typedef struct _tagNET_DVR_MATRIX_VOUTCFG
     DWORD	dwSize; 
     BYTE	byAudio;			//is audio value
     BYTE	byAudioWindowIdx;      /*audio window Index*/
-    BYTE	byDispChanType;      /*display channel type£∫0-BNC£¨1-VGA£¨2-HDMI£¨3-DVI£¨4-YPbPr(DECODER_SERVER device used)*/   
-    BYTE	byVedioFormat;         /*1:NTSC,2:PAL£¨0-NULL*/
+    BYTE	byDispChanType;      /*display channel typeÔºö0-BNCÔºå1-VGAÔºå2-HDMIÔºå3-DVIÔºå4-YPbPr(DECODER_SERVER device used)*/   
+    BYTE	byVedioFormat;         /*1:NTSC,2:PALÔºå0-NULL*/
 	DWORD	dwResolution;
     DWORD	dwWindowMode;		/*the max value get from ability*/       
     BYTE	byJoinDecChan[MAX_WINDOWS_V41];/*the decoder channel of every window conjunction*/
-	BYTE	byEnlargeStatus;          /*0£∫zoom in £¨1£∫zoom out*/
+	BYTE	byEnlargeStatus;          /*0Ôºözoom in Ôºå1Ôºözoom out*/
 	BYTE	byEnlargeSubWindowIndex;//the index of window which is zoom in
-	BYTE	byScale; /*0---realty  show£¨1---zoom show( BNC )*/
-	BYTE	byUnionType;/*0-use for the display channels of decoder in video platform£¨1-use for the other disp channels of decoders*/
+	BYTE	byScale; /*0---realty  showÔºå1---zoom show( BNC )*/
+	BYTE	byUnionType;/*0-use for the display channels of decoder in video platformÔºå1-use for the other disp channels of decoders*/
 	NET_DVR_VIDEO_PLATFORM		struDiff;
     BYTE	byRes2[80];
 }NET_DVR_MATRIX_VOUTCFG,*LPNET_DVR_MATRIX_VOUTCFG;
 
 typedef struct _tagNET_DVR_DISP_CHAN_STATUS_V41
 {
-    BYTE  byDispStatus;      /*0£∫unshow£¨1£∫show*/
-    BYTE  byBVGA;              /*0-BNC£¨1-VGA£¨ 2-HDMI£¨3-DVI*/
+    BYTE  byDispStatus;      /*0ÔºöunshowÔºå1Ôºöshow*/
+    BYTE  byBVGA;              /*0-BNCÔºå1-VGAÔºå 2-HDMIÔºå3-DVI*/
     BYTE  byVideoFormat;     /*1:NTSC,2:PAL,0-NON*/
     BYTE  byWindowMode;      
     BYTE  byJoinDecChan[MAX_WINDOWS_V41];   /*the decoder channel of every window conjunction*/
@@ -10060,7 +10060,7 @@ typedef struct _tagNET_DVR_MATRIX_DEC_REMOTE_PLAY_V41
     BYTE 	byReserve;
     BYTE	sUserName[NAME_LEN];		
     BYTE	sPassword[PASSWD_LEN];
-    DWORD	dwPlayMode;   	/* 0£≠play by file name 1£≠play by time*/        	
+    DWORD	dwPlayMode;   	/* 0Ôºçplay by file name 1Ôºçplay by time*/        	
     NET_DVR_TIME StartTime;
     NET_DVR_TIME StopTime;
     char    sFileName[128];
@@ -10071,7 +10071,7 @@ typedef struct _tagNET_DVR_MATRIX_DEC_REMOTE_PLAY_V41
 
 typedef struct tagNET_DVR_SINGLESCREENCFG
 {
-    BYTE	byScreenSeq;//screen sequence, 0xff means doesn't use this screen£¨the first screen is main screen  
+    BYTE	byScreenSeq;//screen sequence, 0xff means doesn't use this screenÔºåthe first screen is main screen  
     BYTE	bySubSystemNum;//slot index in subsystem of decode, this value is unuseful in 64-T decoder
     BYTE	byDispNum;//display channel index in subsystem of decode
     BYTE	byRes[9];
@@ -10080,11 +10080,11 @@ typedef struct tagNET_DVR_SINGLESCREENCFG
 typedef struct tagNET_DVR_BIGSCREENCFG
 {
     DWORD   dwSize;
-	BYTE	byEnable;				// 0-Enable£¨1-Unable
+	BYTE	byEnable;				// 0-EnableÔºå1-Unable
     BYTE	byModeX;				// splice mode :x
     BYTE	byModeY;				// splice mode :y
     BYTE	byMainDecodeSystem;		// slot index of main screen in video platform, decode channel number in 64-T decoder
-    BYTE	byMainDecoderDispChan;	// display of main screen£¨1.1netra decoder has two display channels, each of them can be used as main screen, this value is unuseful in 64-T decoder
+    BYTE	byMainDecoderDispChan;	// display of main screenÔºå1.1netra decoder has two display channels, each of them can be used as main screen, this value is unuseful in 64-T decoder
 	BYTE	byVideoStandard;		// the format of every single screen is same1:NTSC,2:PAL
     BYTE	byRes1[2];
 	DWORD  dwResolution;			// the resolution of every single screen is same
@@ -10111,7 +10111,7 @@ typedef struct tagNET_DVR_WINCFG
 	BYTE  byVaild;
 	BYTE  byInputIdx;			//input signal index
     BYTE  byLayerIdx;			//picture layer index, 0-the picture on the bottom
-	BYTE  byTransparency;		//transparency£¨0°´100 
+	BYTE  byTransparency;		//transparencyÔºå0ÔΩû100 
 	NET_DVR_RECTCFG  struWin;	//window location
     WORD wScreenHeight;			//height of screen
     WORD wScreenWidth;			//width of screen
@@ -10128,21 +10128,21 @@ typedef struct tagNET_DVR_RECTCFG_SCENE
 
 typedef struct tagNET_DVR_SCENEDISPCFG
 {       
-	BYTE	byEnable;				// 0-not used£¨1-used
+	BYTE	byEnable;				// 0-not usedÔºå1-used
 	BYTE	bySoltNum;				// slot number
 	BYTE	byRes1[2]; 
     BYTE	byDispChanNum; 
-    BYTE	byAudio;				// 0-close£¨1-open
+    BYTE	byAudio;				// 0-closeÔºå1-open
     BYTE	byAudioWindowIdx;       // the index of window which open the audio
 	BYTE	byVedioFormat;          // 1:NTSC,2:PAL,0-NULL
-	BYTE	byWindowMode;			// window mode£¨get from the ability   
+	BYTE	byWindowMode;			// window modeÔºåget from the ability   
 	BYTE	byEnlargeStatus;        // enlarge status, 0: does not enlarge, 1: enlarge
 	BYTE    byEnlargeSubWindowIndex;// index of sub window which enlarge    
-	BYTE	byScale;				// display mode£¨0-the real show£¨1-zoom display(BNC)
+	BYTE	byScale;				// display modeÔºå0-the real showÔºå1-zoom display(BNC)
 	DWORD   dwResolution;			// resolution
 	BYTE	byJoinDecChan[MAX_WINDOWS_V41];	 // join decoder channel of the sub window
 	BYTE	byJoinDecoderId[MAX_WINDOWS_V41];// decoder slot
-	//resolution 1-D1,2-720P,3-1080P£¨the device alloc the decode channel according to this parameter
+	//resolution 1-D1,2-720P,3-1080PÔºåthe device alloc the decode channel according to this parameter
 	BYTE	byDecResolution[MAX_WINDOWS_V41];
 	BYTE	byRow;					// row of the screen in the whole screen wall
 	BYTE	byColumn;				// column of the screen in the whole screen wall
@@ -10154,11 +10154,11 @@ typedef struct tagDEV_CHAN_INFO_SCENE
 {
 	NET_DVR_IPADDR struIP;			// IP address
 	WORD 	wDVRPort;			 	// port
-	BYTE 	byChannel;				// channel index£¨the index start from 33 if the device use ip channel as 9000 dvr
-	BYTE	byTransProtocol;		// trans protocol 0-TCP£¨1-UDP £¨2-MCAST£¨3-RTP
-	BYTE	byTransMode;			// trans mode 0£≠main stream 1£≠sub stream
+	BYTE 	byChannel;				// channel indexÔºåthe index start from 33 if the device use ip channel as 9000 dvr
+	BYTE	byTransProtocol;		// trans protocol 0-TCPÔºå1-UDP Ôºå2-MCASTÔºå3-RTP
+	BYTE	byTransMode;			// trans mode 0Ôºçmain stream 1Ôºçsub stream
 	BYTE	byFactoryType;			// factory type
-	BYTE	byDeviceType;			// device type 1-IPC£¨2- ENCODER
+	BYTE	byDeviceType;			// device type 1-IPCÔºå2- ENCODER
     BYTE	byRes[5];
 	BYTE	sUserName[NAME_LEN];	// user name of the monitor
 	BYTE	sPassword[PASSWD_LEN];	// password of the monitor
@@ -10170,7 +10170,7 @@ typedef struct tagSTREAM_MEDIA_SERVER_CFG_SCENE
 	BYTE	byRes1[3];
 	NET_DVR_IPADDR struDevIP;	// ip of stream media server
 	WORD	wDevPort;			// port of stream media server
-	BYTE	byTransmitType;		// transmit type 0-TCP£¨1-UDP
+	BYTE	byTransmitType;		// transmit type 0-TCPÔºå1-UDP
 	BYTE	byRes2[5];
 }NET_DVR_STREAM_MEDIA_SERVER_CFG_SCENE,*LPNET_DVR_STREAM_MEDIA_SERVER_CFG_SCENE;
 
@@ -10182,7 +10182,7 @@ typedef struct tagPU_STREAM_CFG_SCENE
 
 typedef struct  tagNET_DVR_CYC_SUR_CHAN_ELE_SCENE
 {
-	BYTE							byEnable;				//enable status: 0£≠disable 1-enable
+	BYTE							byEnable;				//enable status: 0Ôºçdisable 1-enable
 	BYTE							byRes[3];
 	NET_DVR_STREAM_MEDIA_SERVER_CFG_SCENE	struStreamMediaSvrCfg;	
     NET_DVR_DEV_CHAN_INFO_SCENE			struDecChanInfo;	//decoder channel information
@@ -10200,7 +10200,7 @@ typedef struct  tagNET_DVR_MATRIX_LOOP_DECINFO_SCENE
 //single decode channel information
 typedef struct tagNET_DVR_DECODECHANCFG_SCENE/*struct size : 2064*/
 {
-	BYTE	byDecodeEnable; //decode mark£¨0-stop£¨1-use dynamic decode£¨2-use loop decode
+	BYTE	byDecodeEnable; //decode markÔºå0-stopÔºå1-use dynamic decodeÔºå2-use loop decode
 	BYTE	bySlotNum;		//slot index
 	BYTE	byDecChan;		//decoder channel index
 	BYTE    byRes[5];
@@ -10214,7 +10214,7 @@ typedef struct tagNET_DVR_DECODECHANCFG_SCENE/*struct size : 2064*/
 typedef struct tagNET_DVR_BIGSCREENCFG_SCENE
 {
     BYTE byAllValid;			//roam status: 0:disable 1-enable 
-    BYTE byAssociateBaseMap;	//base map index£¨0:does not associate
+    BYTE byAssociateBaseMap;	//base map indexÔºå0:does not associate
     BYTE byres[2];
     NET_DVR_WINCFG struWinCfg[MAX_LAYERNUMS];
     NET_DVR_BIGSCREENCFG struBigScreen;
@@ -10229,9 +10229,9 @@ typedef struct tagNET_DVR_MATRIX_SCENECFG
     WORD  wDecChanNums;		//decode channel numbers
     WORD  wDispChanNums;	//display channel numbers
     BYTE  byRes2[12];
-    BYTE  *pBigScreenBuffer;//buffer store big screen struct, byBigScreenNums°¡sizeof(NET_DVR_BIGSCREENCFG_SCENE)
-    BYTE  *pDecChanBuffer;	//buffer store decode channel, wDecChanNums°¡sizeof(NET_DVR_DECODECHANCFG_SCENE)
-    BYTE  *pDispChanBuffer;	//buffer store display channel, wDispChanNums°¡sizeof(NET_DVR_SCENEDISPCFG)
+    BYTE  *pBigScreenBuffer;//buffer store big screen struct, byBigScreenNums√ósizeof(NET_DVR_BIGSCREENCFG_SCENE)
+    BYTE  *pDecChanBuffer;	//buffer store decode channel, wDecChanNums√ósizeof(NET_DVR_DECODECHANCFG_SCENE)
+    BYTE  *pDispChanBuffer;	//buffer store display channel, wDispChanNums√ósizeof(NET_DVR_SCENEDISPCFG)
 }NET_DVR_MATRIX_SCENECFG, *LPNET_DVR_MATRIX_SCENECFG;
 
 /********************************video platform scene end*******************************/
@@ -10244,8 +10244,8 @@ typedef struct tagNET_DVR_ALARMSUBSYSTEMPARAM
     DWORD   dwSize;
     WORD    wEnterDelay;//enter delay  uint:s
     WORD	wExitDelay;//exit delay :s
-    BYTE 	byJointAlarmIn[MAX_ALARMHOST_ALARMIN_NUM];//Use by byte£¨associated Alarm in channel£¨0-not to join£¨1-join
-    BYTE 	byJointKeyboard[MAX_ALARMHOSTKEYBOARD/*64*/];//use by byte £¨support keyboard£¨0-not to join£¨1-join
+    BYTE 	byJointAlarmIn[MAX_ALARMHOST_ALARMIN_NUM];//Use by byteÔºåassociated Alarm in channelÔºå0-not to joinÔºå1-join
+    BYTE 	byJointKeyboard[MAX_ALARMHOSTKEYBOARD/*64*/];//use by byte Ôºåsupport keyboardÔºå0-not to joinÔºå1-join
     BYTE 	byRes[80];			//res
 }NET_DVR_ALARMSUBSYSTEMPARAM, *LPNET_DVR_ALARMSUBSYSTEMPARAM;
 
@@ -10275,8 +10275,8 @@ typedef struct _tagNET_DVR_ALARMHOST_GPRS_CFG
 	BYTE	byAPNUserName[APN_USERNAME_LEN/*24*/];
 	BYTE	byAPNPassWord[APN_USERPASSWORD_LEN/*16*/];
 	BYTE	byReconnTime;	//Reconnect time, it is started when connecting is failed, unit: 10s range:(1-30)
-	BYTE	byOverTime;		//Overtime, if there is no valid data in the OverTime£¨reconnect range: 1-254£¨unit :30s
-	BYTE	byDetectLinkTime;	// range 1-30£¨unit:10s
+	BYTE	byOverTime;		//Overtime, if there is no valid data in the OverTimeÔºåreconnect range: 1-254Ôºåunit :30s
+	BYTE	byDetectLinkTime;	// range 1-30Ôºåunit:10s
 	BYTE	byRes1;
 	BYTE	bySIMNum[NAME_LEN/*32*/]; //SIM number
 	NET_DVR_IPADDR	struSIMIP;	  //Get only
@@ -10300,8 +10300,8 @@ typedef struct _tagNET_DVR_ALARMHOST_REPORTCENTER_CFG
 	DWORD	dwSize;
 	BYTE	byValid;  
 	BYTE	byRes[3]; 
-	BYTE	byChanAlarmMode[MAX_REPORTCHAN_NUM/*4*/];	//alarm channels£¨ 1-T1°¢2-T2°¢ 3-N1°¢ 4-N2°¢5-G1°¢ 6-G2
-	BYTE	byDealFailCenter[MAX_CENTERGROUP_NUM/*16*/]; //send to these centers while send faile 0-not choose°¢1-choose
+	BYTE	byChanAlarmMode[MAX_REPORTCHAN_NUM/*4*/];	//alarm channelsÔºå 1-T1„ÄÅ2-T2„ÄÅ 3-N1„ÄÅ 4-N2„ÄÅ5-G1„ÄÅ 6-G2
+	BYTE	byDealFailCenter[MAX_CENTERGROUP_NUM/*16*/]; //send to these centers while send faile 0-not choose„ÄÅ1-choose
 	BYTE	byDataType;	//1-alarm date 2-not alarm data 3-all data
 	BYTE	byRes2[15];	//
 }NET_DVR_ALARMHOST_REPORTCENTER_CFG, *LPNET_DVR_ALARMHOST_REPORTCENTER_CFG;
@@ -10312,7 +10312,7 @@ typedef struct _tagNET_DVR_ALARMHOST_REPORTCENTER_CFG
 typedef struct tagNET_DVR_STREAM_RECORD_STATUS
 {
 	DWORD          dwSize;
-	BYTE			byRecord;         //(Read only)record type, 0£∫not record 1£∫recording
+	BYTE			byRecord;         //(Read only)record type, 0Ôºönot record 1Ôºörecording
 	BYTE			byRes1[3];        
 	DWORD			dwRelatedHD;      //Related hard disk
 	BYTE			byRes2[8];        
@@ -10343,7 +10343,7 @@ typedef union tagNET_DVR_STREAM_TYPE_UNION
 
 typedef struct tagNET_DVR_STREAM_MODE_TYPE
 {
-	BYTE					byGetStreamType;	//Stream type 0-direct get stream from device£¨1-from stream media°¢2-From IPServer to device ip to get stream, 3.From IPServer find device£¨then get stream by stream media 4-From stream media by URL
+	BYTE					byGetStreamType;	//Stream type 0-direct get stream from deviceÔºå1-from stream media„ÄÅ2-From IPServer to device ip to get stream, 3.From IPServer find deviceÔºåthen get stream by stream media 4-From stream media by URL
 	BYTE					byRes[3];			
     NET_DVR_STREAM_TYPE_UNION	uGetStream;			
 }NET_DVR_STREAM_MODE_TYPE, *LPNET_DVR_STREAM_MODE_TYPE;
@@ -10397,8 +10397,8 @@ typedef struct tagNET_DVR_SCREEN_WINCFG
     DWORD	dwLayerIdx;			//index of layer, 0- layer is on the bottom 
 	NET_DVR_RECTCFG  struWin;	//window location, relativity to the display wall
 	BYTE	byWndIndex;			//index of window
-	BYTE	byCBD;				//0-NULL£¨1-has background£¨2-no background
-	BYTE	bySubWnd;			//0-yes£¨1-no
+	BYTE	byCBD;				//0-NULLÔºå1-has backgroundÔºå2-no background
+	BYTE	bySubWnd;			//0-yesÔºå1-no
 	BYTE	byDeviceID[16];		//device ID
 	BYTE	byRes[5];
 }NET_DVR_SCREEN_WINCFG, *LPNET_DVR_SCREEN_WINCFG;
@@ -10438,7 +10438,7 @@ typedef struct tagNET_DVR_LAYOUT_LIST
 
 typedef enum tagNET_DVR_CAM_MODE
 {
-	NET_DVR_UNKNOW  = 0,//Œﬁ–ß
+	NET_DVR_UNKNOW  = 0,//Êó†Êïà
 	NET_DVR_CAM_BNC,
 	NET_DVR_CAM_VGA,
 	NET_DVR_CAM_DVI,
@@ -10461,8 +10461,8 @@ typedef struct _NET_DVR_INPUTSTREAMCFG
 	WORD	wInputIdxOnBoard;				//station of signal source in the board
 	WORD	wResolutionX;					//resolution
 	WORD	wResolutionY;
-	BYTE	byVideoFormat;					//vedio format£¨0-NULL£¨1-NTSC£¨2-PAL
-	BYTE	byNetSignalResolution;			//1-CIF 2-4CIF 3-720P 4-1080P 5-500wp the resolution of net signal£¨device alloc resource according to this parameter°£
+	BYTE	byVideoFormat;					//vedio formatÔºå0-NULLÔºå1-NTSCÔºå2-PAL
+	BYTE	byNetSignalResolution;			//1-CIF 2-4CIF 3-720P 4-1080P 5-500wp the resolution of net signalÔºådevice alloc resource according to this parameter„ÄÇ
 	BYTE	sGroupName[NAME_LEN/*32*/];	//group name of net signal
 	BYTE	byRes[2];  
 }NET_DVR_INPUTSTREAMCFG, *LPNET_DVR_INPUTSTREAMCFG;
@@ -10551,7 +10551,7 @@ typedef struct tagNET_DVR_ANALOGINPUTSTATUS
 {
 	DWORD	dwLostFrame;		//the number of lost frames
 	BYTE	byHaveSignal;		//is there signal? 0-no 1-yes
-	BYTE	byVideoFormat;		//video format£¨1£∫NTSC,2£∫PAL,0£∫null
+	BYTE	byVideoFormat;		//video formatÔºå1ÔºöNTSC,2ÔºöPAL,0Ôºönull
 	BYTE	byRes[46];
 } NET_DVR_ANALOGINPUTSTATUS, *LPNET_DVR_ANALOGINPUTSTATUS;
 
@@ -10583,7 +10583,7 @@ typedef struct tagNET_DVR_SCREENINPUTSTATUS
 typedef struct _NET_DVR_SCREENALARMCFG
 {
 	DWORD	dwSize;
-    BYTE	byAlarmType;	//alarm type£¨1-subboard pull out£¨2-Insert subboard£¨3-subsystem abnormal£¨4-subsystem restoration 5-input source abnormal   6-alarm of temperature 7-FPGA version mismatch 8-begin plan 9-plan over
+    BYTE	byAlarmType;	//alarm typeÔºå1-subboard pull outÔºå2-Insert subboardÔºå3-subsystem abnormalÔºå4-subsystem restoration 5-input source abnormal   6-alarm of temperature 7-FPGA version mismatch 8-begin plan 9-plan over
 	BYTE	byBoardType;	// 1-input board 2-output board 
 	BYTE	bySubException;	//sub exception when input exception occur 1- change resolution normal 2-change interface 3-resolution error 4-resolution change, lead to alloc resource error 5-resolution change, lead to window size is not in the normal range 6-resolution return to normal
 	BYTE	byRes1; 
@@ -10596,8 +10596,8 @@ typedef struct _NET_DVR_SCREENALARMCFG
 typedef struct tagNET_DVR_MATRIX_CFG
 {
     BYTE  byValid;				//is the analog platform valid; 0- not valid,  1-valid 
-    BYTE  byCommandProtocol;	//the command of platform , 1-MATRIX_COMMAND_V1£¨ 2-MATRIX_COMMAND_V2, 3-MATRIX_COMMAND_V3, 4-MATRIX_COMMAND_V4
-    BYTE  byScreenType;			//screen type£¨1-TCL£¨2-zhongda
+    BYTE  byCommandProtocol;	//the command of platform , 1-MATRIX_COMMAND_V1Ôºå 2-MATRIX_COMMAND_V2, 3-MATRIX_COMMAND_V3, 4-MATRIX_COMMAND_V4
+    BYTE  byScreenType;			//screen typeÔºå1-TCLÔºå2-zhongda
     BYTE  byRes1;
     BYTE  byScreenToMatrix[32];	//relation between screen and analog
     BYTE  byRes2[4];
@@ -10626,7 +10626,7 @@ typedef struct tagNET_DVR_SCREEN_SCREENINFO
 {
     DWORD dwSize;
     BYTE byValid;				//Is the struct valid or not? 0-not valid,  1-valid
-    BYTE nLinkMode;				//link mode£¨0-serial work£¨1-network
+    BYTE nLinkMode;				//link modeÔºå0-serial workÔºå1-network
     BYTE byDeviceType;			//device type, get from ability
     BYTE byScreenLayX;			//lay of the screen , x coordinate
     BYTE byScreenLayY;			//lay of the screen, y coordinate
@@ -10635,7 +10635,7 @@ typedef struct tagNET_DVR_SCREEN_SCREENINFO
     BYTE sPassword[PASSWD_LEN]; //password   
 	BYTE sDevName[NAME_LEN];	//device name
     NET_DVR_SCREEN_UNION struScreenUnion;
-    BYTE byInputNum;			// input source£¨used for platform
+    BYTE byInputNum;			// input sourceÔºåused for platform
 	BYTE byOutputNum;			// output source , used for platform
 	BYTE byCBDNum;				//CBD numbers
 	BYTE byRes2[29];
@@ -10667,7 +10667,7 @@ typedef struct _tagNET_DVR_OSDCFG
 {
 	DWORD   dwSize;
 	BYTE    byValid;    //Is the struct valid or not? 0-not valid,  1-valid
-    BYTE    	byDispMode;  //Display mode £¨1-transparent£¨2-translucent£¨3-cover
+    BYTE    	byDispMode;  //Display mode Ôºå1-transparentÔºå2-translucentÔºå3-cover
     BYTE    uByFontColor_y; /*Font color Y    0-255*/
     BYTE    uByFontColor_u; /*Font color U    0-255*/
     BYTE    uByFontColor_v; /*Font color V    0-255*/
@@ -10697,12 +10697,12 @@ typedef struct _tagNET_DVR_SERIAL_CONTROL
 typedef enum tagINPUT_INTERFACE_TYPE
 {
 	INTERFACE_VGA = 0,
-	INTERFACE_SVIDEO,	// 2046NL does not support£¨2046NH support
+	INTERFACE_SVIDEO,	// 2046NL does not supportÔºå2046NH support
 	INTERFACE_YPBPR,
 	INTERFACE_DVI ,
 	INTERFACE_BNC , 
-	INTERFACE_DVI_LOOP,	// (loop through) 2046NH not support£¨2046NL support
-	INTERFACE_BNC_LOOP, // (loop through) 2046NH not support£¨2046NL.support
+	INTERFACE_DVI_LOOP,	// (loop through) 2046NH not supportÔºå2046NL support
+	INTERFACE_BNC_LOOP, // (loop through) 2046NH not supportÔºå2046NL.support
 }INPUT_INTERFACE_TYPE;
 typedef struct tagNET_DVR_INPUT_INTERFACE_CTRL
 {
@@ -10713,14 +10713,14 @@ typedef struct tagNET_DVR_INPUT_INTERFACE_CTRL
 typedef struct tagNET_DVR_DISPLAY_COLOR_CTRL
 {
 	BYTE	byColorType;		//1-brightness 2-contrast 3-saturation 4-definition
-	char	byScale;			//-1 °¢0°¢+1
+	char	byScale;			//-1 „ÄÅ0„ÄÅ+1
 	BYTE	byRes[14];
 }NET_DVR_DISPLAY_COLOR_CTRL, *LPNET_DVR_DISPLAY_COLOR_CTRL;
 //control position
 typedef struct tagNET_DVR_DISPLAY_POSITION_CTRL
 {
 	BYTE	byPositionType;		//1-horizontal position 2-vertical position
-	char	byScale;			//-1 °¢0°¢+1
+	char	byScale;			//-1 „ÄÅ0„ÄÅ+1
 	BYTE	byRes[14];
 }NET_DVR_DISPLAY_POSITION_CTRL, *LPNET_DVR_DISPLAY_POSITION_CTRL;
 
@@ -10753,15 +10753,15 @@ typedef enum
 	NET_DVR_SCREEN_POWER_ON,   		// turn on screen
 }NET_DVR_PLAN_OPERATE_TYPE;
 
-/*‘§∞∏œÓ–≈œ¢*/
+/*È¢ÑÊ°àÈ°π‰ø°ÊÅØ*/
 typedef struct  tagNET_DVR_PLAN_INFO
 {
 	BYTE  	byValid;      	// is the plan valid
-	BYTE  	byType;       	// º˚∂®“ÂNET_DVR_PLAN_OPERATE_TYPE
+	BYTE  	byType;       	// ËßÅÂÆö‰πâNET_DVR_PLAN_OPERATE_TYPE
 	WORD  	wLayoutNo;  	// layout number
-	BYTE	byScreenStyle;    //the type of screen£¨1-low bright£¨2-high bright
+	BYTE	byScreenStyle;    //the type of screenÔºå1-low brightÔºå2-high bright
 	BYTE	byRes1[3];
-	DWORD  	dwDelayTime;  	// plan delay time£¨ unit /s
+	DWORD  	dwDelayTime;  	// plan delay timeÔºå unit /s
 	BYTE	byRes2[32];
 } NET_DVR_PLAN_INFO, *LPNET_DVR_PLAN_INFO;
 typedef struct tagNET_DVR_CYCLE_TIME
@@ -10770,22 +10770,22 @@ typedef struct tagNET_DVR_CYCLE_TIME
 	BYTE	byRes[3];
 	NET_DVR_TIME_EX struTime;
 }NET_DVR_CYCLE_TIME, *LPNET_DVR_CYCLE_TIME;
-/*‘§∞∏π‹¿Ì*/
+/*È¢ÑÊ°àÁÆ°ÁêÜ*/
 typedef struct tagNET_DVR_PLAN_CFG
 {
 	DWORD 	dwSize;
 	BYTE  	byValid;      	// is the plan valid
-	BYTE  	byWorkMode;  	// the plan work mode 1-manual£¨2-auto£¨3-cycle
+	BYTE  	byWorkMode;  	// the plan work mode 1-manualÔºå2-autoÔºå3-cycle
 	BYTE	byRes1[2];
 	BYTE  	byPlanName[NAME_LEN/*32*/]; //plan name
 	NET_DVR_TIME_EX struTime; // time when the work mode is auto
 	NET_DVR_CYCLE_TIME struTimeCycle[DAYS_A_WEEK/*7*/]; /*cycle time*/
-	DWORD 	dwWorkCount;  	// plan work count£¨0-keep working else-count
+	DWORD 	dwWorkCount;  	// plan work countÔºå0-keep working else-count
 	NET_DVR_PLAN_INFO strPlanEntry[MAX_PLAN_ACTION_NUM/*32*/];  // plan information
 	BYTE	byRes2[64];
 }NET_DVR_PLAN_CFG, *LPNET_DVR_PLAN_CFG;
 
-/*‘§∞∏¡–±Ì*/
+/*È¢ÑÊ°àÂàóË°®*/
 typedef struct tagNET_DVR_PLAN_LIST
 {
 	DWORD		dwSize;
@@ -10850,7 +10850,7 @@ typedef  struct tagNET_DVR_ALARMHOST_ALARMOUTSTATUS
 	DWORD	dwSize;
 	BYTE	byName[32];		//the name of Alarm output or siren
 	BYTE	byAlarmType;	//1-Alarm output status, 2-SirenStatus
-	WORD	wChan;			//if the byAlarmType is alarm output status, this value is 0-511£ªelse if the byAlarmType is siren status, this value is 1-8 (there is only one siren in SAFETYCABIN)
+	WORD	wChan;			//if the byAlarmType is alarm output status, this value is 0-511Ôºõelse if the byAlarmType is siren status, this value is 1-8 (there is only one siren in SAFETYCABIN)
 	BYTE	byAlarmStatus; //Alarm status,   0-no alarm 1-alarm
 	BYTE	byRes[32];
 }NET_DVR_ALARMHOST_ALARMOUTSTATUS,*LPNET_DVR_ALARMHOST_ALARMOUTSTATUS;
@@ -10859,7 +10859,7 @@ typedef  struct tagNET_DVR_ALARMHOST_ALARMOUTSTATUS
 typedef struct _tagNET_DVR_AUDIO_PARAM
 {
 	DWORD		dwSize;
-	BYTE		byAudioFormat;      //audio format£¨1-G711£¨2-OggVorbis 
+	BYTE		byAudioFormat;      //audio formatÔºå1-G711Ôºå2-OggVorbis 
 	BYTE		byRes1;
     WORD		wChannels;          // number of channels (i.e. mono, stereo...)
     DWORD		dwSamplesPerSec;	//samples per second
@@ -11074,7 +11074,7 @@ typedef struct tagNET_ITC_POST_RS485_PARAM
 typedef struct tagNET_ITC_RADAR_PARAM
 {
 	BYTE    byRadarType;	//Radar type: 0- no radar, 1- Andoray radar, 2- Olvia, 3- TransMicrowave, 0xff- other type
-	BYTE    byLevelAngle;   //Angle to the horizontal, default: 25°„, value range: 0~90°„
+	BYTE    byLevelAngle;   //Angle to the horizontal, default: 25¬∞, value range: 0~90¬∞
 	WORD    wRadarSensitivity; //Radar sensitivity 
     BYTE    byRes[20];
 }NET_ITC_RADAR_PARAM, *LPNET_ITC_RADAR_PARAM;
@@ -11218,7 +11218,7 @@ typedef struct tagNET_ITC_EPOLICE_LANE_PARAM
 	BYTE byRelatedDriveWay;//The related lane number
 	WORD wDistance; //Coil distance, unit: cm
 	BYTE byRecordEnable;//Cycle recording sign of red light running behavior: 0- not record, 1- record
-	BYTE byRecordType;//Recording type of red light running behavior: 0- pre-recording£¨1- delay recording
+	BYTE byRecordType;//Recording type of red light running behavior: 0- pre-recordingÔºå1- delay recording
 	BYTE byPreRecordTime;//Pre-recording time of red light running behavior (default: 0), unit: s
 	BYTE byRecordDelayTime;//Recording delay time of red light running behavior (default: 0), unit: s
 	BYTE byRecordTimeOut;//Recording timeout time of red light running behavior, unit: s
@@ -11302,7 +11302,7 @@ typedef struct tagNET_ITC_SINGLE_RS485_LIGHT_PARAM
 //RS485 access light
 typedef struct tagNET_ITC_RS485_LIGHT_PARAM
 {
-	NET_ITC_SINGLE_RS485_LIGHT_PARAM struRS485Light[MAX_LIGHT_NUM]; //µ•∏ˆ485Ω”»Î–≈∫≈µ∆≤Œ ˝
+	NET_ITC_SINGLE_RS485_LIGHT_PARAM struRS485Light[MAX_LIGHT_NUM]; //Âçï‰∏™485Êé•ÂÖ•‰ø°Âè∑ÁÅØÂèÇÊï∞
     BYTE byRes[8];
 }NET_ITC_RS485_LIGHT_PARAM, *LPNET_ITC_RS485_LIGHT_PARAM;
 
@@ -11905,8 +11905,8 @@ typedef enum _PREVIEW_DISPLAY_MODE_
 		PREVIEW_DISPLAY_FISHEYE = 1, //Single window fish-eye
 		PREVIEW_DISPLAY_PTZ = 2,   //Single window PTZ
 		PREVIEW_DISPLAY_FULL_PANORAMA = 3, //Single window to the four corners of panoramic Expand
-		PREVIEW_DISPLAY_TWO_AROUNDPANORAMA = 4,  //Upper and lower split-screen two windows 180 °„ (around panorama)
-		PREVIEW_DISPLAY_WIDEPANORAMA_TWO_PTZ = 5, //A 360 °„ (around panorama) plus two PTZ split screen; three window
+		PREVIEW_DISPLAY_TWO_AROUNDPANORAMA = 4,  //Upper and lower split-screen two windows 180 ¬∞ (around panorama)
+		PREVIEW_DISPLAY_WIDEPANORAMA_TWO_PTZ = 5, //A 360 ¬∞ (around panorama) plus two PTZ split screen; three window
 		PREVIEW_DISPLAY_ONE_PANORAMA_TWO_PTZ = 6, //Four corners of the panorama (local) +2 PTZ split-screen
 		PREVIEW_DISPLAY_FISHEYE_THREE_PTZ = 7 //A ball with three PTZ split screen (picture)
 }PREVIEW_DISPLAY_MODE;
@@ -11972,7 +11972,7 @@ typedef struct tagNET_DVR_CERT_PARAM
 {
 	DWORD dwSize;
 	WORD wCertFunc; //certificate func,0-802.1x,1-HTTPS
-	WORD wCertType; //certificate type,0-CA£¨1-Certificate,2-private key file
+	WORD wCertType; //certificate type,0-CAÔºå1-Certificate,2-private key file
 	BYTE byFileType; //certificate file type,0-PEM,1-PFX
 	BYTE  byRes[35]; 
 }NET_DVR_CERT_PARAM, *LPNET_DVR_CERT_PARAM;
@@ -12013,8 +12013,8 @@ typedef struct tagNET_DEVICEID_INFO
 {
 	DWORD		dwSize;
 	BYTE		sDeviceID[DEVICEID_LEN/*32*/]; 	//device ID
-	DWORD		dwChan;							//channel index£¨index of BNC processor is1-16£¨index of RGB processor is 1£¨index of stream processor1-4
-	DWORD		dwInputSignalIndex;				//signal index£¨used in CVCS
+	DWORD		dwChan;							//channel indexÔºåindex of BNC processor is1-16Ôºåindex of RGB processor is 1Ôºåindex of stream processor1-4
+	DWORD		dwInputSignalIndex;				//signal indexÔºåused in CVCS
 	BYTE		byRes[60];
 }NET_DVR_DEVICEID_INFO, *LPNET_DVR_DEVICEID_INFO;
 
@@ -12035,7 +12035,7 @@ typedef struct tagNET_DVR_CHAN_INFO
 {
 	DWORD  dwSize;
 	BYTE   byValid;					//0-invalid 1-valid
-	BYTE   byUsed;					//0-not used£¨1-used
+	BYTE   byUsed;					//0-not usedÔºå1-used
 	BYTE   byRes1[2];
 	BYTE   sChanName[NAME_LEN];    //channel name
 	NET_DVR_COLOR struVideoColor;  //video color
@@ -12059,8 +12059,8 @@ typedef struct tagNET_DVR_NETSIGNAL_INFO
 {
 	DWORD	dwSize;
 	BYTE	byDevName[NAME_LEN/*32*/];		// net signal name
-	NET_DVR_PU_STREAM_CFG struPuStream;		// net signal information£¨if byValid of struStreamMediaSvrCfg is 0, use struDevChanInfo for the param of net signal
-	BYTE	byValid;						// 0-invalid£¨set 0 when delete signal, 1-valid£¨set 1 when add or mod signal/
+	NET_DVR_PU_STREAM_CFG struPuStream;		// net signal informationÔºåif byValid of struStreamMediaSvrCfg is 0, use struDevChanInfo for the param of net signal
+	BYTE	byValid;						// 0-invalidÔºåset 0 when delete signal, 1-validÔºåset 1 when add or mod signal/
 	BYTE 	byRes1[3];						// res
 	BYTE	sGroupName[NAME_LEN/*32*/];		// group name of net signal
 	BYTE	byRes2[28];						// res	
@@ -12094,7 +12094,7 @@ typedef struct  tagNET_DVR_SINGLE_DEV_INFO
 	DWORD	dwSoftVersion;			// soft version, the highest 8 bits is main version, other 8bits is sub version. the last 16 bits is repair version
 	DWORD	dwSoftwareBuildDate; 	// version Build data, 0xYYYYMMDD
 	BYTE	byUseInSys;				// 0-not used in system 1-used in the system
-	BYTE	byDevStatus;			// device status£¨0-offline£¨1-online 
+	BYTE	byDevStatus;			// device statusÔºå0-offlineÔºå1-online 
 	BYTE	byDeviceType;			// device type  describe in struct DEVICE_TYPE 
 	BYTE	byRes1;
 	BYTE	sDeviceID[DVCS_DEVICEID_LEN];				//device id 
@@ -12148,7 +12148,7 @@ typedef struct tagNET_DVR_DISP_SCREEN
 typedef struct tagNET_DVR_TEXTSHOW
 {
 	DWORD dwSize;
-	BYTE  byShowText;		//0-display text£¨1-do not display text
+	BYTE  byShowText;		//0-display textÔºå1-do not display text
 	BYTE  byRes[35];
 }NET_DVR_TEXTSHOW, *LPNET_DVR_TEXTSHOW;
 
@@ -12164,7 +12164,7 @@ typedef struct tagNET_DVR_SCREENLIST
 typedef struct tagNET_DVR_OPERATE_DEVICE
 {
 	DWORD	dwSize;
-	DWORD	dwSubCommand;	//1-start upgrade£¨2-stop upgrade
+	DWORD	dwSubCommand;	//1-start upgradeÔºå2-stop upgrade
 	BYTE	sDeviceID[DVCS_DEVICEID_LEN];
 	BYTE	byRes[32];
 }NET_DVR_OPERATE_DEVICE, *LPNET_DVR_OPERATE_DEVICE;
@@ -12189,7 +12189,7 @@ typedef enum
 typedef struct tagNET_DVR_START_PIC_VIEW_INFO
 {
 	DWORD	dwSize;
-	DWORD	dwSignalIndex;					// signal index£¨used in cvcs
+	DWORD	dwSignalIndex;					// signal indexÔºåused in cvcs
 	BYTE	sDeviceID[DVCS_DEVICEID_LEN];	// device id
 	BYTE	byChanIndex;					// channel index
 	BYTE	byRes[31];
@@ -12198,7 +12198,7 @@ typedef struct tagNET_DVR_START_PIC_VIEW_INFO
 typedef struct tagNET_DVR_DVCS_STATE_ALARM
 {
 	DWORD  dwSize;
-	BYTE   byAlarmType;                //alarm type 1-device online£¨2-device offline 3-server online 4-server offline
+	BYTE   byAlarmType;                //alarm type 1-device onlineÔºå2-device offline 3-server online 4-server offline
 	BYTE   byDeviceType;			   //device type ,see struct NET_DVCS_DEVICE_TYPE
 	BYTE   byRes1[2];
 	BYTE   sDeviceID[16];
@@ -12236,8 +12236,8 @@ typedef struct tagNET_DVR_POE_CHANNEL_ADD_MODE
 typedef struct tagNET_DVR_ESATA_MINISAS_USAGE
 {
 	DWORD		dwSize;
-	BYTE	    byESATAUsage[MAX_ESATA_NUM];		// 0£∫backup 1£∫record	  
-	BYTE	    byMiniSASUsage[MAX_MINISAS_NUM];	// 0£∫backup 1£∫record
+	BYTE	    byESATAUsage[MAX_ESATA_NUM];		// 0Ôºöbackup 1Ôºörecord	  
+	BYTE	    byMiniSASUsage[MAX_MINISAS_NUM];	// 0Ôºöbackup 1Ôºörecord
 	BYTE 		byRes[32];
 }NET_DVR_ESATA_MINISAS_USAGE, *LPNET_DVR_ESATA_MINISAS_USAGE;
 
@@ -12256,7 +12256,7 @@ typedef struct tagNET_DVR_BACKUP_LOG_PARAM
 typedef struct tagNET_DVR_DIGITAL_CHANNEL_STATE
 {
 	DWORD dwSize;
-	BYTE  byDigitalAudioChanTalkState[MAX_CHANNUM_V30];  //Digital audio talk state 0-not use£¨1-using, 0xff, not valid
+	BYTE  byDigitalAudioChanTalkState[MAX_CHANNUM_V30];  //Digital audio talk state 0-not useÔºå1-using, 0xff, not valid
 	BYTE  byRes[512];
 }NET_DVR_DIGITAL_CHANNEL_STATE, *LPNET_DVR_DIGITAL_CHANNEL_STATE;
 
@@ -12390,7 +12390,7 @@ typedef struct tagNET_ITS_PLATE_RESULT
 	DWORD   dwMatchNo;  //Matched Serial Number. (consisting of the vehicle serial number, data type and lane number)
 	BYTE    byGroupNum;	//Amount of the picture groups (the amount of pictures captured when one vehicle passing by. The data can be used for the Time Delay Matching.)
 	BYTE    byPicNo;	//Continuous captured pictures serial number. (indicating the complete of the receiving.)
-	BYTE    bySecondCam;	//Whether set the second camera to snapshot (e.g. prospect camera of far and near scene capture, rear camera of front and rear capture£©
+	BYTE    bySecondCam;	//Whether set the second camera to snapshot (e.g. prospect camera of far and near scene capture, rear camera of front and rear captureÔºâ
 	BYTE    byFeaturePicNo; //electric alarm of running red light, which picture taken to be close-up, 0xff- not take
 	BYTE	    byDriveChan;	//Triggering lane No.
 	BYTE     byRes1[3];			//Reserved
@@ -12505,9 +12505,9 @@ typedef struct tagNET_ITS_OVERLAP_ITEM_PARAM
 	DWORD dwItemsStlye;   //Overlay style: 0- horizontal,1- vertical, (default: horizontal)
 	WORD wStartPosTop;    //The starting top coordinate, only effective for the internal overlay of picture[0~2448](default:0)
 	WORD wStartPosLeft;   //The starting left coordinate,only effective for the internal overlay of picture[0~2448](default:0)
-	WORD wCharStyle;    //Font type: 0- Times New Roman,1- Œ∫ÃÂ(default)
+	WORD wCharStyle;    //Font type: 0- Times New Roman,1- È≠è‰Ωì(default)
 	WORD wCharSize;     //Font size: 0--16x16,1--32x32,2-48x48,3--64x64 (default)
-	WORD wCharInterval;    //Character spacing: [0°´16]£¨unit: pixel(default)
+	WORD wCharInterval;    //Character spacing: [0ÔΩû16]Ôºåunit: pixel(default)
 	BYTE    byRes1[2];
 	DWORD dwForeClorRGB; //foreground color RGB value: bit0-1:(B) bit2-3:(G) bit4-5:(G) (default: x00FFFFFF- white)
 	DWORD dwBackClorRGB; //Background color RGB value, only effective for the extra overlay of picture: bit0-1:(B) bit2-3:(G) bit4-5:(G) (default: x00000000- black)
@@ -12637,7 +12637,7 @@ typedef struct tagNET_DVR_AUTO_REBOOT_CFG
 typedef struct tagNET_DVR_MENU_OUTPUT_MODE
 {
 	DWORD		dwSize;
-	BYTE		byMenuOutputMode; //menu output mode. not homologous device£∫0-Auto 1-main CVBS 2-HDMI 3-VGA homologous device£∫0-Auto 1-main CVBS 2-HDMI/VGA
+	BYTE		byMenuOutputMode; //menu output mode. not homologous deviceÔºö0-Auto 1-main CVBS 2-HDMI 3-VGA homologous deviceÔºö0-Auto 1-main CVBS 2-HDMI/VGA
 	BYTE		byRes[63];
 }NET_DVR_MENU_OUTPUT_MODE, *LPNET_DVR_MENU_OUTPUT_MODE;
 
@@ -12770,14 +12770,14 @@ typedef struct tagNET_DVR_MB_MOBILEDEV_STATUS
 typedef struct tagNET_DVR_GPS_INFO
 {
 	BYTE    byDirection[2];		/*direction[0]0or1(east longitude/west longitude), direction[1]:0or1(North latitude/south latitude)  */
-    BYTE    bySvs;         /* satellite vehicles£∫Effective Satellite number */
-	BYTE    byLocateMode;  /* location mode£∫only NMEA0183 3.00 version£¨0=auto£¨1=Differential£¨2=Estimate£¨3= Invalid data*/
-    WORD    wHDOP;  /* horizontal accuracy£¨0.5-99.9£¨below 6 represent high accuracy£¨above 20 need to be abandoned£¨this value is multipled by 10 */     
+    BYTE    bySvs;         /* satellite vehiclesÔºöEffective Satellite number */
+	BYTE    byLocateMode;  /* location modeÔºöonly NMEA0183 3.00 versionÔºå0=autoÔºå1=DifferentialÔºå2=EstimateÔºå3= Invalid data*/
+    WORD    wHDOP;  /* horizontal accuracyÔºå0.5-99.9Ôºåbelow 6 represent high accuracyÔºåabove 20 need to be abandonedÔºåthis value is multipled by 10 */     
 	WORD    wHeight;         	/* height */
 	DWORD   dwLatitude;	 /*latitude = degree*3600*100+branch*60*100+second*100 */
 	DWORD   dwLongitude; /*longitude =degree*3600*100+branch*60*100+second*100 */
 	DWORD   dwVehicleSpeed;		/* mobile speed =speed*100000 kph*/
-	DWORD	dwVehicleDirection;	/* mobile direction= actual direction*100£¨colockwise from North, uint:degree */
+	DWORD	dwVehicleDirection;	/* mobile direction= actual direction*100Ôºåcolockwise from North, uint:degree */
 	BYTE	byRes[8];            
 }NET_DVR_GPS_INFO,*LPNET_DVR_GPS_INFO; 
 
@@ -12818,8 +12818,8 @@ typedef struct tagNET_DVR_SDKLOCAL_CFG
 typedef  struct  tagNET_DVR_OPTICAL_CHANNEL_BIND
 {
     WORD wChannelIndex;    //optical port num(0-7)
-	WORD wSubChannel;      //sub optical channel£¨get value range from ability set
-	BYTE  byBind;      //0-not bind£¨1-bind
+	WORD wSubChannel;      //sub optical channelÔºåget value range from ability set
+	BYTE  byBind;      //0-not bindÔºå1-bind
 	BYTE  byRes[3];
 }NET_DVR_OPTICAL_CHANNEL_BIND,*LPNET_DVR_OPTICAL_CHANNEL_BIND;
 
@@ -12854,7 +12854,7 @@ typedef struct tagNET_DVR_AUDIO_SURCHAN_CFG
 typedef struct tagNET_DVR_AUDIO_SURCHAN_STATUS
 {
 	DWORD dwSize;
-	BYTE  byStatus;      //switch status£¨0-no switched,1-switched
+	BYTE  byStatus;      //switch statusÔºå0-no switched,1-switched
 	BYTE  byRes1[3];
 	//byStatus == 1 valid
 	DWORD dwSubWinNum;   //related sub window number
@@ -12903,8 +12903,8 @@ typedef struct tagNET_DVR_LOGO_OVERLAYCFG
 
 typedef struct tagNET_DVR_STRUCTHEAD
 {
-    WORD	wLength;		//Ω·ππ≥§∂»
-    BYTE	byVersion ;	/*∏ﬂµÕ4Œª∑÷±¥˙±Ì∏ﬂµÕ∞Ê±æ£¨∫Û–¯∏˘æ›∞Ê±æ∫Õ≥§∂»Ω¯––¿©’π£¨≤ªÕ¨µƒ∞Ê±æµƒ≥§∂»Ω¯––œﬁ÷∆*/
+    WORD	wLength;		//ÁªìÊûÑÈïøÂ∫¶
+    BYTE	byVersion ;	/*È´ò‰Ωé4‰ΩçÂàÜÂà´‰ª£Ë°®È´ò‰ΩéÁâàÊú¨ÔºåÂêéÁª≠Ê†πÊçÆÁâàÊú¨ÂíåÈïøÂ∫¶ËøõË°åÊâ©Â±ïÔºå‰∏çÂêåÁöÑÁâàÊú¨ÁöÑÈïøÂ∫¶ËøõË°åÈôêÂà∂*/
     BYTE	byRes;
 }NET_DVR_STRUCTHEAD, *LPNET_DVR_STRUCTHEAD;
 
@@ -13029,8 +13029,8 @@ typedef struct tagNET_DVR_CODESVR_ABILITY
 typedef struct tagNET_DVR_CODER_SERVER_OUTPUT_CFG
 {
 	DWORD  dwSize;
-	BYTE   byDispChanType;		/*display channel type£∫0-BNC£¨1-VGA£¨2-HDMI£¨3-DVI*/ 
-	BYTE   byVedioFormat;      /*1:NTSC,2:PAL£¨0-NULL*/
+	BYTE   byDispChanType;		/*display channel typeÔºö0-BNCÔºå1-VGAÔºå2-HDMIÔºå3-DVI*/ 
+	BYTE   byVedioFormat;      /*1:NTSC,2:PALÔºå0-NULL*/
 	BYTE   byRes1[2];
 	DWORD  dwResolution;       //resolution
 	DWORD  dwWindowMode;		/*window mode*/
@@ -13043,7 +13043,7 @@ typedef struct tagNET_DVR_DISPLAY_START_INFO
 	DWORD  dwDisplayChan; //display channel number
 	DWORD  dwCodeChan; //code channel number
 	DWORD  dwWinNum;   //window number
-	BYTE   byEnableAudio; //enable video£¨0-disable£¨1-enable
+	BYTE   byEnableAudio; //enable videoÔºå0-disableÔºå1-enable
 	BYTE   byRes[31];
 }NET_DVR_DISPLAY_START_INFO,*LPNET_DVR_DISPLAY_START_INFO;
 
@@ -13059,8 +13059,8 @@ typedef struct tagNET_DVR_WINDOW_STATUS
 {
     DWORD  dwSize;         
     DWORD  dwCodeChan;      /*code channel number*/
-    BYTE   byDisplay;        /*enable output£¨0-disable£¨1-enable*/
-    BYTE   byAudio;			/*enable video£¨0-disable£¨1-enable*/   
+    BYTE   byDisplay;        /*enable outputÔºå0-disableÔºå1-enable*/
+    BYTE   byAudio;			/*enable videoÔºå0-disableÔºå1-enable*/   
     BYTE   byRes[30];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 }NET_DVR_WINDOW_STATUS,*LPNET_DVR_WINDOW_STATUS;
 
@@ -13682,9 +13682,9 @@ NET_DVR_API BOOL  __stdcall NET_DVR_GetLocalIP(char strIP[16][16], DWORD *pValid
 NET_DVR_API BOOL  __stdcall NET_DVR_SetValidIP(DWORD dwIPIndex, BOOL bEnableBind);
 NET_DVR_API BOOL __stdcall NET_DVR_GetVcaDevWorkState(LONG lUserID, LPNET_DVR_VCA_DEV_WORKSTATUS lpWorkState);
 #ifdef __cplusplus
-	NET_DVR_API BOOL  __stdcall NET_DVR_SetRecvTimeOut(DWORD nRecvTimeOut = 5000); //◊Ó–°3000∫¡√Î
+	NET_DVR_API BOOL  __stdcall NET_DVR_SetRecvTimeOut(DWORD nRecvTimeOut = 5000); //ÊúÄÂ∞è3000ÊØ´Áßí
 #else
-	NET_DVR_API BOOL  __stdcall NET_DVR_SetRecvTimeOut(DWORD nRecvTimeOut); //◊Ó–°3000∫¡√Î
+	NET_DVR_API BOOL  __stdcall NET_DVR_SetRecvTimeOut(DWORD nRecvTimeOut); //ÊúÄÂ∞è3000ÊØ´Áßí
 #endif
 NET_DVR_API BOOL __stdcall NET_DVR_MatrixGetDisplayCfg_V40(LONG lUserID, DWORD dwDispChanNum, LPNET_DVR_VGA_DISP_CHAN_CFG_V40 lpDisplayCfg);			  
 NET_DVR_API BOOL __stdcall NET_DVR_MatrixSetDisplayCfg_V40(LONG lUserID, DWORD dwDispChanNum, LPNET_DVR_VGA_DISP_CHAN_CFG_V40 lpDisplayCfg);
