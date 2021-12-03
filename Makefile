@@ -13,6 +13,12 @@ linux:
 	cp dist/logins build/Linux
 	cp dist/passwords build/Linux
 
+	cd front && npm install && npm run build && cd ..
+	cp -r front/dist/ build/Linux/
+	cp bin/hikka.sh build/Linux/
+	cp -r rtsp-server/ build/Linux/
+
+
 windows:
 	CGO_CFLAGS="-I${WDIR}/include" CGO_LDFLAGS="-L${WDIR}/lib/Windows -Wl,--enable-stdcall-fixup,-rpath=${WDIR}/lib/Windows -lHCNetSDK" GOOS=windows CC=x86_64-w64-mingw32-gcc CXX=x86_64-w64-mingw32-g++ go build -ldflags "-s -w" -o build/Windows/hikka.exe src/main.go src/hikka.go
 	cp lib/Windows/HCNetSDK.dll build/Windows/
