@@ -18,7 +18,7 @@ linux:
 	cp bin/hikka.sh build/Linux/
 	cp -r rtsp-server/ build/Linux/
 
-	chmod +x build/Linux/hikka.sh
+	chmod +x build/Linux/hikka.sh  build/Linux/hikka
 	cd build/Linux && ./hikka.sh
 
 
