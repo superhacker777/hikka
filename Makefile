@@ -11,14 +11,15 @@ linux:
 	cp lib/Linux/libHCCore.so build/Linux/
 	cp lib/Linux/libhpr.so build/Linux/
 	cp -r lib/Linux/HCNetSDKCom/ build/Linux/
-	cp dist/hosts build/Linux
-	cp dist/logins build/Linux
-	cp dist/passwords build/Linux
+	cp dist/{hosts,logins,passwords} build/Linux
 
 	cd front && npm install && npm run build && cd ..
 	cp -r front/dist/ build/Linux/
 	cp bin/hikka.sh build/Linux/
 	cp -r rtsp-server/ build/Linux/
+
+	chmod +x build/Linux/hikka.sh
+	cd build/Linux && ./hikka.sh
 
 
 windows:
