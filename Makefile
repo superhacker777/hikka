@@ -4,7 +4,9 @@ export WDIR=${PWD}
 all: linux windows
 
 linux:
-	CGO_ENABLED=0 GOOS=linux CGO_CFLAGS="-I${WDIR}/include" CGO_LDFLAGS="-L${WDIR}/lib/Linux -Wl,-rpath=${WDIR}/lib/Linux -lhcnetsdk" go build -ldflags "-s -w" -o build/Linux/hikka main/main.go main/hikka.go
+	cd main
+	CGO_ENABLED=0 GOOS=linux CGO_CFLAGS="-I${WDIR}/include" CGO_LDFLAGS="-L${WDIR}/lib/Linux -Wl,-rpath=${WDIR}/lib/Linux -lhcnetsdk" go build -ldflags "-s -w" -o ${WDIR}build/Linux/hikka main.go hikka.go
+	cd ..
 	cp lib/Linux/libhcnetsdk.so build/Linux/
 	cp lib/Linux/libHCCore.so build/Linux/
 	cp lib/Linux/libhpr.so build/Linux/

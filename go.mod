@@ -1,4 +1,4 @@
-module github.com/shenjler/goproject
+module github.com/shenjler/hikka
 
 go 1.16
 
