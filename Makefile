@@ -25,7 +25,13 @@ windows:
 	cp -r front/dist/ build/Windows/
 	# cd ${PWD}/../../rtsp-server/
 	# cp rtsp-simple-server.yml ../hikka/hikka/build/Windows/
-	# go build -ldflags "-s -w" -o ../hikka/hikka/build/Windows/rtsp-server.exe main.go
+	# go build -ldflags "-s -w" -o ../hikka/hikka/rtsp-server/rtsp-server.exe main.go
+
+	## build GOOS=linux file
+	# SET CGO_ENABLED=0
+	# SET GOARCH=amd64
+	# SET GOOS=linux
+	# go build -ldflags "-s -w" -o ../hikka/hikka/rtsp-server/rtsp-server-linux main.go
 
 clean:
 	rm -r build/
