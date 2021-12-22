@@ -1,8 +1,8 @@
 <template>
   <div id="pc">
     <!-- <video ref="video" width="100%" height="640" controls></video> -->
-    <iframe style="width:400px;height:300px" ></iframe>
-    <iframe style="width:400px;height:300px" ></iframe>
+    <iframe style="width:400px;height:300px" src="/rtsp/aDoor"></iframe>
+    <iframe style="width:400px;height:300px" src="/rtsp/aDoor"></iframe>
 
     <div style="margin-top: 20px" >
     <button style="" class="button" @click="openDoor('aDoor')">打开A栋大门</button>

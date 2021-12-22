@@ -1,13 +1,13 @@
 <template>
   <div id="mobile">
     <!-- <video ref="video" width="100%" height="640" controls></video> --> 
-    <iframe style="width:98%;height:300px" ></iframe>
-    <button style="" class="button" @click="openDoor('aDoor')" src="/rtsp/aDoor">打开A栋大门</button>
+    <iframe style="width:98%;height:300px" src="/rtsp/aDoor"></iframe>
+    <button style="" class="button" @click="openDoor('aDoor')">打开A栋大门</button>
 
     <div style="margin-top: 20px" >
 
-    <iframe style="width:98%;height:300px"></iframe>
-    <button style="" class="button" @click="openDoor('bDoor')" src="/rtsp/bDoor">打开B栋大门</button>
+    <iframe style="width:98%;height:300px" src="/rtsp/bDoor"></iframe>
+    <button style="" class="button" @click="openDoor('bDoor')">打开B栋大门</button>
 
     
     </div>

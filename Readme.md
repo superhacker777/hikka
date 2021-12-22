@@ -1,3 +1,12 @@
+
+
+# 找不到so问题
+```
+error while loading shared libraries: libhcnetsdk.so: cannot open shared object问题解决
+https://blog.csdn.net/chentuo2000/article/details/120261879
+
+```
+
 #hikka — IP camera bruteforcer based on Hikvision SDK.
 
 ---
